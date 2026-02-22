@@ -16,11 +16,10 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   const locale = resolveLocale(localeParam);
   const content = contentByLocale[locale];
 
-  const title = `${content.siteName} — Hot Yoga, Barre & Pilates in Yerevan`;
-  const description =
-    "Yerevan's first English-friendly boutique fitness studio. Hot yoga, barre, and Pilates reformer classes in Kentron. Join the waitlist for founding member pricing.";
+  const title = content.metaTitle;
+  const description = content.metaDescription;
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://studioyerevan.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofia.fitness";
 
   return {
     title,
@@ -42,7 +41,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
       type: "website",
       images: [
         {
-          url: "/og-image.svg",
+          url: "/images/og-image.svg",
           width: 1200,
           height: 630,
           alt: "Studio Yerevan"
@@ -53,7 +52,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
       card: "summary_large_image",
       title,
       description,
-      images: ["/og-image.svg"]
+      images: ["/images/og-image.svg"]
     },
     alternates: {
       canonical: `${baseUrl}/${locale}`,

@@ -1,35 +1,50 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import BackgroundBeams from "@/components/aceternity/background-beams";
 import TextGenerateEffect from "@/components/aceternity/text-generate-effect";
 import BackgroundVideo from "@/components/shared/BackgroundVideo";
 import ScrollIndicator from "@/components/shared/ScrollIndicator";
-import WaitlistCounter from "@/components/shared/WaitlistCounter";
 import { Button } from "@/components/ui/button";
 import Badge from "@/components/ui/badge";
 import { SECTION_IDS, type LandingContent } from "@/lib/constants";
 
 type HeroProps = {
   content: LandingContent;
-  waitlistCount: number;
 };
 
-export default function Hero({ content, waitlistCount }: HeroProps) {
-  const videoCdn = process.env.NEXT_PUBLIC_VIDEO_CDN_URL;
-  const desktopVideoSrc = videoCdn ? `${videoCdn}/hero-desktop.mp4` : "/videos/hero-desktop.mp4";
-  const mobileVideoSrc = videoCdn ? `${videoCdn}/hero-mobile.mp4` : "/videos/hero-mobile.mp4";
+export default function Hero({ content }: HeroProps) {
+  const desktopCloudflareIframeSrc =
+    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_DESKTOP_IFRAME_URL ??
+    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/65929572aefd9680dbee8d0210b37839/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F65929572aefd9680dbee8d0210b37839%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600";
+  const mobileCloudflareIframeSrc =
+    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_MOBILE_IFRAME_URL ??
+    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/8c1960ea376d832a7b8cace716aa32ae/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F8c1960ea376d832a7b8cace716aa32ae%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600";
+
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
     <section
+      ref={sectionRef}
       id={SECTION_IDS.hero}
       data-track-section={SECTION_IDS.hero}
-      className="section-shell relative flex min-h-screen items-center justify-center pt-20"
+      className="section-shell relative flex min-h-[85svh] items-center justify-center pb-10 pt-16 md:min-h-screen md:pb-0 md:pt-20"
     >
-      <BackgroundVideo
-        className="absolute inset-0"
-        posterSrc="/images/placeholders/hero-poster.svg"
-        desktopSrc={desktopVideoSrc}
-        mobileSrc={mobileVideoSrc}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/65 to-bg" />
+      <motion.div className="absolute inset-0" style={{ opacity: videoOpacity }}>
+        <BackgroundVideo
+          className="absolute inset-0"
+          posterSrc="/images/gallery/fitness-1.jpg"
+          desktopIframeSrc={desktopCloudflareIframeSrc}
+          mobileIframeSrc={mobileCloudflareIframeSrc}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/75 to-bg" />
+      </motion.div>
       <BackgroundBeams className="opacity-85" />
 
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center text-center">
@@ -37,7 +52,7 @@ export default function Hero({ content, waitlistCount }: HeroProps) {
           <TextGenerateEffect words={content.badge} />
         </Badge>
 
-        <h1 className="text-balance text-5xl font-black md:text-7xl">{content.heroHeadline}</h1>
+        <h1 className="text-balance text-4xl font-black md:text-7xl">{content.heroHeadline}</h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-lg text-text md:text-xl">{content.heroSubheadline}</p>
 
@@ -45,14 +60,9 @@ export default function Hero({ content, waitlistCount }: HeroProps) {
           <a href={`#${SECTION_IDS.waitlist}`}>
             <Button size="xl">{content.heroCta}</Button>
           </a>
-
-          <div className="rounded-full border border-white/15 bg-black/40 px-5 py-3 text-sm text-text-muted backdrop-blur">
-            <WaitlistCounter initialCount={waitlistCount} className="mr-1 text-lg font-semibold text-text" />
-            people on the waitlist
-          </div>
         </div>
 
-        <div className="mt-16">
+        <div className="mt-10 md:mt-16">
           <ScrollIndicator />
         </div>
       </div>

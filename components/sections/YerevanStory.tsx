@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import StickyScrollReveal from "@/components/aceternity/sticky-scroll-reveal";
 import BackgroundVideo from "@/components/shared/BackgroundVideo";
 import { SECTION_IDS, type LandingContent } from "@/lib/constants";
@@ -17,15 +17,16 @@ export default function YerevanStory({ content }: YerevanStoryProps) {
   const yerevanStoryMobileCloudflareIframeSrc =
     process.env.NEXT_PUBLIC_CLOUDFLARE_YEREVAN_STORY_MOBILE_IFRAME_URL;
   const sectionRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
 
-  // Video fades in as section enters, fades out as it leaves
-  const videoOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
-  // Overlay gets darker as you scroll through (better text readability)
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.7, 0.45, 0.65, 0.8]);
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [0, 1, 1, 0.15]);
+  const videoY = useTransform(scrollYProgress, [0, 1], [-42, 42]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1.1, 1.02]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [0.72, 0.5, 0.62, 0.76]);
 
   return (
     <section
@@ -35,16 +36,23 @@ export default function YerevanStory({ content }: YerevanStoryProps) {
       className="relative isolate overflow-hidden py-24 md:py-32"
     >
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ opacity: videoOpacity }}>
+        <motion.div
+          className="absolute inset-0 will-change-transform"
+          style={{
+            opacity: prefersReducedMotion ? 1 : videoOpacity,
+            y: prefersReducedMotion ? 0 : videoY,
+            scale: prefersReducedMotion ? 1 : videoScale
+          }}
+        >
           <BackgroundVideo
             posterSrc="/images/gallery/fitness-5.jpg"
             desktopIframeSrc={yerevanStoryCloudflareIframeSrc}
             mobileIframeSrc={yerevanStoryMobileCloudflareIframeSrc}
-            mobileCover
+            cover
             className="absolute inset-0"
           />
         </motion.div>
-        <motion.div className="absolute inset-0 bg-black" style={{ opacity: overlayOpacity }} />
+        <motion.div className="absolute inset-0 bg-black" style={{ opacity: prefersReducedMotion ? 0.65 : overlayOpacity }} />
       </div>
 
       <div className="section-shell relative z-10">

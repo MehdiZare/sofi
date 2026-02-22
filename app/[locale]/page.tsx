@@ -50,7 +50,7 @@ export default async function LocalePage({ params }: LocalePageProps) {
       <Concept content={content} />
       <YerevanStory content={content} />
       <Founder content={content} />
-      <Pricing content={content} waitlistCount={waitlistStats.count} />
+      <Pricing content={content} waitlistCount={waitlistStats.count} locale={locale} />
       <SocialProof content={content} />
       <WaitlistSection content={content} />
       <Footer locale={locale} content={content} />

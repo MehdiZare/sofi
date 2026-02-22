@@ -58,10 +58,10 @@ export default function LanguageSelector({ locale, languageNames, label }: Langu
             prefetch={false}
             aria-current={targetLocale === locale ? "page" : undefined}
             className={cn(
-              "mono rounded-full px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] transition",
+              "mono rounded-full border px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] transition",
               targetLocale === locale
-                ? "bg-primary text-white"
-                : "text-text-muted hover:bg-white/10 hover:text-text"
+                ? "pointer-events-none border-accent-warm/70 bg-accent-warm/20 text-accent-warm shadow-[0_0_0_1px_rgba(212,165,116,0.35)_inset]"
+                : "border-transparent text-text-muted hover:bg-white/10 hover:text-text"
             )}
           >
             {targetLocale.toUpperCase()}
@@ -80,6 +80,9 @@ export default function LanguageSelector({ locale, languageNames, label }: Langu
         >
           <Globe className="h-4 w-4 text-accent-warm" />
           <span>{languageNames[locale]}</span>
+          <span className="mono rounded-full border border-accent-warm/40 bg-accent-warm/15 px-1.5 py-0.5 text-[10px] uppercase tracking-[0.12em] text-accent-warm">
+            {locale}
+          </span>
           <ChevronDown className="h-4 w-4 text-text-muted" />
         </button>
 
@@ -101,10 +104,10 @@ export default function LanguageSelector({ locale, languageNames, label }: Langu
                     prefetch={false}
                     onClick={() => setMobileOpen(false)}
                     className={cn(
-                      "flex items-center justify-between rounded-2xl border px-4 py-3",
+                      "flex items-center justify-between rounded-2xl border px-4 py-3 transition",
                       targetLocale === locale
-                        ? "border-primary/70 bg-primary/15 text-text"
-                        : "border-white/10 bg-surface-elevated text-text-muted"
+                        ? "pointer-events-none border-accent-warm/70 bg-accent-warm/15 text-text"
+                        : "border-white/10 bg-surface-elevated text-text-muted hover:border-white/20 hover:text-text"
                     )}
                   >
                     <span className="text-sm">{languageNames[targetLocale]}</span>

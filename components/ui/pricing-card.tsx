@@ -1,19 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
+import posthog from "posthog-js";
 import Badge from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SECTION_IDS } from "@/lib/constants";
+import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+
+const isPosthogEnabled = Boolean(process.env.NEXT_PUBLIC_POSTHOG_KEY);
 
 type PricingCardProps = {
   name: string;
   price: string;
+  amountAmd: number;
   regularPrice: string;
   commitment: string;
   perks: string;
   cta: string;
+  locale: Locale;
   regularPriceLabel: string;
   commitmentLabel: string;
   perksLabel: string;
@@ -24,17 +30,28 @@ type PricingCardProps = {
 export default function PricingCard({
   name,
   price,
+  amountAmd,
   regularPrice,
   commitment,
   perks,
   cta,
+  locale,
   regularPriceLabel,
   commitmentLabel,
   perksLabel,
   featuredLabel,
   featured
 }: PricingCardProps) {
-  const scrollToWaitlist = () => {
+  const handleCtaClick = () => {
+    if (isPosthogEnabled) {
+      posthog.capture("purchase_completed", {
+        amount: amountAmd,
+        currency: "AMD",
+        tier_name: name,
+        locale
+      });
+    }
+
     document.getElementById(SECTION_IDS.waitlist)?.scrollIntoView({
       behavior: "smooth",
       block: "start"
@@ -75,7 +92,7 @@ export default function PricingCard({
           </div>
         </dl>
 
-        <Button type="button" size="lg" className="mt-auto w-full" aria-controls={SECTION_IDS.waitlist} onClick={scrollToWaitlist}>
+        <Button type="button" size="lg" className="mt-auto w-full" aria-controls={SECTION_IDS.waitlist} onClick={handleCtaClick}>
           {cta}
         </Button>
       </Card>

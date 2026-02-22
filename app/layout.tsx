@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
+import PosthogProvider from "@/components/shared/PosthogProvider";
 import TrackingScripts from "@/components/shared/TrackingScripts";
 import "./globals.css";
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className="bg-bg text-text antialiased">
         <TrackingScripts />
+        <PosthogProvider />
         {children}
         <Analytics />
       </body>

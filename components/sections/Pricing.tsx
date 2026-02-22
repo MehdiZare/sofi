@@ -2,13 +2,15 @@ import WaitlistCounter from "@/components/shared/WaitlistCounter";
 import PricingCard from "@/components/ui/pricing-card";
 import SectionHeader from "@/components/ui/section-header";
 import { SECTION_IDS, type LandingContent } from "@/lib/constants";
+import type { Locale } from "@/lib/i18n";
 
 type PricingProps = {
   content: LandingContent;
   waitlistCount: number;
+  locale: Locale;
 };
 
-export default function Pricing({ content, waitlistCount }: PricingProps) {
+export default function Pricing({ content, waitlistCount, locale }: PricingProps) {
   return (
     <section id={SECTION_IDS.pricing} data-track-section={SECTION_IDS.pricing} className="section-shell py-24 md:py-32">
       <SectionHeader badge={content.pricingBadge} title={content.pricingTitle} />
@@ -28,6 +30,7 @@ export default function Pricing({ content, waitlistCount }: PricingProps) {
             commitmentLabel={content.pricingLabels.commitment}
             perksLabel={content.pricingLabels.perks}
             featuredLabel={content.pricingLabels.featured}
+            locale={locale}
           />
         ))}
       </div>

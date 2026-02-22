@@ -33,6 +33,7 @@ export type ClassCard = {
 export type PricingTier = {
   name: string;
   price: string;
+  amountAmd: number;
   regularPrice: string;
   commitment: string;
   perks: string;
@@ -206,7 +207,8 @@ const enContent: LandingContent = {
   pricingTiers: [
     {
       name: "Early Bird Deposit",
-      price: "$25 (refundable)",
+      price: "10,000 ֏ (refundable)",
+      amountAmd: 10000,
       regularPrice: "—",
       commitment: "None",
       perks: "Priority access + credit on opening",
@@ -214,8 +216,9 @@ const enContent: LandingContent = {
     },
     {
       name: "Founding 10-Pack",
-      price: "$90 (save 25%)",
-      regularPrice: "$120",
+      price: "36,000 ֏ (save 25%)",
+      amountAmd: 36000,
+      regularPrice: "48,000 ֏",
       commitment: "No expiry",
       perks: "Founding member badge, priority booking",
       cta: "Lock In My Rate",
@@ -223,8 +226,9 @@ const enContent: LandingContent = {
     },
     {
       name: "Founding Unlimited",
-      price: "$99/mo (save 34%)",
-      regularPrice: "$150/mo",
+      price: "39,600 ֏/mo (save 34%)",
+      amountAmd: 39600,
+      regularPrice: "60,000 ֏/mo",
       commitment: "3-month minimum",
       perks: "Unlimited classes, VIP events, lifetime rate lock",
       cta: "Become a Founder"
@@ -341,7 +345,8 @@ const hyContent: LandingContent = {
   pricingTiers: [
     {
       name: "Վաղ գրանցման ավանդ",
-      price: "$25 (վերադարձվող)",
+      price: "10,000 ֏ (վերադարձվող)",
+      amountAmd: 10000,
       regularPrice: "—",
       commitment: "Չկա",
       perks: "Առաջնահերթ հասանելիություն + բացման ժամանակ կրեդիտ",
@@ -349,8 +354,9 @@ const hyContent: LandingContent = {
     },
     {
       name: "Հիմնադիր 10 դաս",
-      price: "$90 (25% խնայողություն)",
-      regularPrice: "$120",
+      price: "36,000 ֏ (25% խնայողություն)",
+      amountAmd: 36000,
+      regularPrice: "48,000 ֏",
       commitment: "Ժամկետանցում չկա",
       perks: "Հիմնադիրի նշան, առաջնահերթ ամրագրում",
       cta: "Ֆիքսել գինս",
@@ -358,8 +364,9 @@ const hyContent: LandingContent = {
     },
     {
       name: "Հիմնադիր անսահմանափակ",
-      price: "$99/ամիս (34% խնայողություն)",
-      regularPrice: "$150/ամիս",
+      price: "39,600 ֏/ամիս (34% խնայողություն)",
+      amountAmd: 39600,
+      regularPrice: "60,000 ֏/ամիս",
       commitment: "Նվազագույնը 3 ամիս",
       perks: "Անսահմանափակ դասեր, VIP միջոցառումներ, ցմահ գնի ֆիքսում",
       cta: "Դառնալ հիմնադիր"
@@ -476,7 +483,8 @@ const ruContent: LandingContent = {
   pricingTiers: [
     {
       name: "Ранний депозит",
-      price: "$25 (возвратный)",
+      price: "10,000 ֏ (возвратный)",
+      amountAmd: 10000,
       regularPrice: "—",
       commitment: "Нет",
       perks: "Приоритетный доступ + кредит при открытии",
@@ -484,8 +492,9 @@ const ruContent: LandingContent = {
     },
     {
       name: "Founding 10-Pack",
-      price: "$90 (экономия 25%)",
-      regularPrice: "$120",
+      price: "36,000 ֏ (экономия 25%)",
+      amountAmd: 36000,
+      regularPrice: "48,000 ֏",
       commitment: "Без срока действия",
       perks: "Значок founding member, приоритетное бронирование",
       cta: "Зафиксировать цену",
@@ -493,8 +502,9 @@ const ruContent: LandingContent = {
     },
     {
       name: "Founding Unlimited",
-      price: "$99/мес (экономия 34%)",
-      regularPrice: "$150/мес",
+      price: "39,600 ֏/мес (экономия 34%)",
+      amountAmd: 39600,
+      regularPrice: "60,000 ֏/мес",
       commitment: "Минимум 3 месяца",
       perks: "Безлимитные занятия, VIP-события, пожизненная фиксация цены",
       cta: "Стать основателем"

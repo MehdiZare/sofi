@@ -30,15 +30,16 @@ export default function Footer({ locale, content }: FooterProps) {
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center">
         <p className="mono text-sm uppercase tracking-[0.18em] text-accent-warm">{content.siteName}</p>
         <p className="max-w-xl text-text-muted">{content.footerTagline}</p>
+        <p className="max-w-xl text-sm text-text-muted">{content.footerInstagramCta}</p>
 
         <div className="flex items-center gap-4 text-text-muted">
-          <a href="https://instagram.com/studioyerevan" aria-label="Instagram" target="_blank" rel="noreferrer">
+          <a href={content.instagramUrl} aria-label="Instagram" target="_blank" rel="noreferrer">
             <InstagramIcon className="h-5 w-5" />
           </a>
-          <a href="https://t.me/studioyerevan" aria-label="Telegram" target="_blank" rel="noreferrer">
+          <a href={content.telegramUrl} aria-label="Telegram" target="_blank" rel="noreferrer">
             <Send className="h-5 w-5" />
           </a>
-          <a href="https://facebook.com/studioyerevan" aria-label="Facebook" target="_blank" rel="noreferrer">
+          <a href={content.facebookUrl} aria-label="Facebook" target="_blank" rel="noreferrer">
             <FacebookIcon className="h-5 w-5" />
           </a>
         </div>

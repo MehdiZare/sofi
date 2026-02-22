@@ -43,7 +43,7 @@ export default function SocialProof({ content }: SocialProofProps) {
         </InfiniteMovingCards>
 
         <a
-          href="https://instagram.com/studioyerevan"
+          href={content.instagramUrl}
           target="_blank"
           rel="noreferrer"
           className="inline-flex rounded-full border border-white/15 px-5 py-2 text-sm text-text-muted transition hover:border-white/35 hover:text-text"

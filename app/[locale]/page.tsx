@@ -8,6 +8,7 @@ import Navigation from "@/components/shared/Navigation";
 import Hero from "@/components/sections/Hero";
 import ReferralCapture from "@/components/shared/ReferralCapture";
 import SectionViewTracker from "@/components/shared/SectionViewTracker";
+import CookieConsent from "@/components/shared/CookieConsent";
 
 const Concept = dynamic(() => import("@/components/sections/Concept"));
 const YerevanStory = dynamic(() => import("@/components/sections/YerevanStory"));
@@ -46,14 +47,19 @@ export default async function LocalePage({ params }: LocalePageProps) {
         languageSelectorLabel={content.languageSelectorLabel}
       />
 
-      <Hero content={content} />
+      <Hero content={content} waitlistCount={waitlistStats.count} />
       <Concept content={content} />
       <YerevanStory content={content} />
       <Founder content={content} />
       <Pricing content={content} waitlistCount={waitlistStats.count} locale={locale} />
       <SocialProof content={content} />
-      <WaitlistSection content={content} />
+      <WaitlistSection content={content} waitlistCount={waitlistStats.count} />
       <Footer locale={locale} content={content} />
+      <CookieConsent
+        text={content.cookieBannerText}
+        acceptLabel={content.cookieAcceptLabel}
+        declineLabel={content.cookieDeclineLabel}
+      />
 
       <script
         id="local-business-schema"

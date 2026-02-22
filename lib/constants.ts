@@ -15,11 +15,10 @@ export const SECTION_IDS = {
 export type SectionId = (typeof SECTION_IDS)[keyof typeof SECTION_IDS];
 
 export type NavLabels = {
-  concept: string;
-  yerevanStory: string;
-  founder: string;
+  about: string;
+  classes: string;
   pricing: string;
-  waitlist: string;
+  join: string;
 };
 
 export type ClassCard = {
@@ -63,15 +62,23 @@ export type LandingContent = {
   cityLabel: string;
   languageSelectorLabel: string;
   languageNames: Record<Locale, string>;
+  instagramHandle: string;
+  instagramUrl: string;
+  telegramUrl: string;
+  facebookUrl: string;
   navLabels: NavLabels;
   badge: string;
   heroHeadline: string;
   heroSubheadline: string;
   heroCta: string;
+  heroWaitlistPrefix: string;
+  heroWaitlistSuffix: string;
+  scrollIndicatorLabel: string;
   classFormatsBadge: string;
   conceptTitle: string;
   conceptIntro: string;
   classCards: readonly ClassCard[];
+  conceptStoryParagraph: string;
   yerevanBadge: string;
   yerevanTitle: string;
   yerevanBody: string;
@@ -98,11 +105,18 @@ export type LandingContent = {
   waitlistSubtitle: string;
   waitlistAlreadyPrefix: string;
   waitlistAlreadySuffix: string;
+  waitlistReferralPrompt: string;
   footerTagline: string;
+  footerInstagramCta: string;
   privacyLabel: string;
   termsLabel: string;
+  cookieBannerText: string;
+  cookieAcceptLabel: string;
+  cookieDeclineLabel: string;
   metaTitle: string;
   metaDescription: string;
+  ogTitle: string;
+  ogDescription: string;
 };
 
 const languageNames: Record<Locale, string> = {
@@ -114,91 +128,93 @@ const languageNames: Record<Locale, string> = {
 const cloudflareClassIframes = {
   yoga:
     process.env.NEXT_PUBLIC_CLOUDFLARE_YOGA_IFRAME_URL ??
-    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/d77a8add3d38d5b5cf48ff9af23b2597/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Fd77a8add3d38d5b5cf48ff9af23b2597%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
-  barre:
-    process.env.NEXT_PUBLIC_CLOUDFLARE_BARRE_IFRAME_URL ??
-    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/22b23aa7f35b43bce64bf0e1558c5967/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F22b23aa7f35b43bce64bf0e1558c5967%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
-  pilates:
-    process.env.NEXT_PUBLIC_CLOUDFLARE_PILATES_IFRAME_URL ??
-    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/556595e95c1c6e4583c0d645d846ee11/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F556595e95c1c6e4583c0d645d846ee11%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/d77a8add3d38d5b5cf48ff9af23b2597/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Fd77a8add3d38d5b5cf48ff9af23b2597%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
 } as const;
 
 export function getNavItems(labels: NavLabels): { id: SectionId; label: string }[] {
   return [
-    { id: SECTION_IDS.concept, label: labels.concept },
-    { id: SECTION_IDS.yerevanStory, label: labels.yerevanStory },
-    { id: SECTION_IDS.founder, label: labels.founder },
+    { id: SECTION_IDS.yerevanStory, label: labels.about },
+    { id: SECTION_IDS.concept, label: labels.classes },
     { id: SECTION_IDS.pricing, label: labels.pricing },
-    { id: SECTION_IDS.waitlist, label: labels.waitlist }
+    { id: SECTION_IDS.waitlist, label: labels.join }
   ];
 }
 
 const enContent: LandingContent = {
-  siteName: "Studio Yerevan",
+  siteName: "Sofi Fitness",
   cityLabel: "Yerevan, Armenia",
   languageSelectorLabel: "Language",
   languageNames,
+  instagramHandle: "studioyerevan",
+  instagramUrl: "https://instagram.com/studioyerevan",
+  telegramUrl: "https://t.me/studioyerevan",
+  facebookUrl: "https://facebook.com/studioyerevan",
   navLabels: {
-    concept: "Offer",
-    yerevanStory: "Story",
-    founder: "Co-Founder",
+    about: "About",
+    classes: "Classes",
     pricing: "Pricing",
-    waitlist: "Waitlist"
+    join: "Join"
   },
-  badge: "Yerevan's First • Coming 2026",
+  badge: "Yerevan's First · Coming 2026",
   heroHeadline: "Where Movement Meets the Mountains",
   heroSubheadline:
-    "Hot yoga • Barre • Pilates Reformer — Yerevan's first English-friendly boutique studio.",
+    "Hot yoga · Strength · Mobility & Recovery — Yerevan's first English-friendly boutique studio",
   heroCta: "Join the Waitlist",
-  classFormatsBadge: "Class Formats",
+  heroWaitlistPrefix: "",
+  heroWaitlistSuffix: "people on the waitlist",
+  scrollIndicatorLabel: "Scroll to explore",
+  classFormatsBadge: "What We Offer",
   conceptTitle: "What We Offer",
-  conceptIntro:
-    "We're building something Yerevan has never seen — a boutique fitness space designed for the international community.",
+  conceptIntro: "Hot yoga, strength, mobility and recovery, and parent-friendly training.",
   classCards: [
     {
       title: "Hot Yoga",
       tagline: "Heat. Sweat. Transform.",
-      description: "The only heated yoga studio in Armenia. 95°F, 60 minutes, complete release.",
+      description: "The only heated yoga in Armenia. 95°F, 60 minutes, complete release.",
       image: "/images/gallery/fitness-2.jpg",
       iframeSrc: cloudflareClassIframes.yoga
     },
     {
-      title: "Barre",
-      tagline: "Grace Meets Strength",
-      description: "Ballet-inspired. Full-body burn. No dance experience needed.",
-      image: "/images/gallery/fitness-3.jpg",
-      iframeSrc: cloudflareClassIframes.barre
+      title: "Strength Fundamentals",
+      tagline: "Build From the Ground Up.",
+      description: "Functional strength with dumbbells and bodyweight. Proper form. Real results.",
+      image: "/images/gallery/fitness-3.jpg"
     },
     {
-      title: "Pilates Reformer",
-      tagline: "Reform Everything",
-      description: "Group reformer classes — first of their kind in Yerevan.",
-      image: "/images/gallery/fitness-4.jpg",
-      iframeSrc: cloudflareClassIframes.pilates
+      title: "Mobility & Recovery",
+      tagline: "Move Better. Feel Better.",
+      description: "Deep stretching, myofascial release, breath work. Your body's reset button.",
+      image: "/images/gallery/fitness-4.jpg"
+    },
+    {
+      title: "Mom/Dad & Baby",
+      tagline: "Stronger Together.",
+      description: "Parent-focused fitness with baby integration. Core rehab, strength, community.",
+      image: "/images/gallery/fitness-6.jpg"
     }
   ],
+  conceptStoryParagraph:
+    "We're building something Yerevan has never seen — a boutique fitness space designed for the international community. English-friendly classes. World-class formats. A studio that feels like the ones you loved in New York, London, or LA — with Mount Ararat in the window.",
   yerevanBadge: "The Yerevan Story",
   yerevanTitle: "Born in Yerevan. Made for the World.",
   yerevanBody:
     "Yerevan is having a moment. A creative, international community is growing in one of the world's oldest cities. We're here to move with it.",
   yerevanStats: [
-    { value: "70,000+", label: "Expats in Armenia" },
-    { value: "0", label: "Hot yoga studios in Yerevan" },
-    { value: "1", label: "Studio launching soon" }
+    { value: "70,000+", label: "expats" },
+    { value: "0", label: "boutique studios" },
+    { value: "1", label: "coming soon" }
   ],
-  founderBadge: "Co-Founder",
-  founderTitle: "Meet the Co-Founder",
-  founderName: "Marzie Zare, Co-Founder & Lead Instructor",
+  founderBadge: "Meet the Founder",
+  founderTitle: "Meet the Founder",
+  founderName: "Marzie Zare, Founder & Lead Instructor",
   founderBio:
-    "Originally from Iran and currently pursuing her Master of Sports at the University of Würzburg, Marzie is building the studio she always wished existed in Yerevan. The studio is named after her daughter, Sofia.",
+    "With a degree in Physical Education and years of experience as a gym instructor and English teacher, Marzie has spent her career helping people move better. She's bringing world-class boutique fitness to Yerevan because this city — and its growing international community — deserves it.",
   founderQuote:
     "I've spent my career helping people move better. Yerevan deserves a studio that matches its energy.",
   founderCredentials: [
-    "MSc Sports (in progress)",
-    "Certified Yoga Instructor",
-    "Barre Instructor",
-    "Pilates Reformer Certified",
-    "English-Language Coaching"
+    "Physical Education Degree",
+    "Certified Gym Instructor",
+    "English Language Teaching"
   ],
   pricingBadge: "Founding Rates",
   pricingTitle: "Founding Member Pricing",
@@ -221,8 +237,7 @@ const enContent: LandingContent = {
       regularPrice: "48,000 ֏",
       commitment: "No expiry",
       perks: "Founding member badge, priority booking",
-      cta: "Lock In My Rate",
-      featured: true
+      cta: "Lock In My Rate"
     },
     {
       name: "Founding Unlimited",
@@ -230,137 +245,155 @@ const enContent: LandingContent = {
       amountAmd: 39600,
       regularPrice: "60,000 ֏/mo",
       commitment: "3-month minimum",
-      perks: "Unlimited classes, VIP events, lifetime rate lock",
-      cta: "Become a Founder"
+      perks: "All classes unlimited, VIP events, lifetime rate lock",
+      cta: "Become a Founder",
+      featured: true
     }
   ],
   pricingLabels: {
-    regularPrice: "Regular",
+    regularPrice: "Regular price",
     commitment: "Commitment",
     perks: "Perks",
     featured: "Most Popular"
   },
-  socialBadge: "Social Proof",
+  socialBadge: "Community",
   socialTitle: "Community in Motion",
   socialFollowLabel: "Follow our journey @studioyerevan",
-  socialGridImageAlt: "Studio community moment",
+  socialGridImageAlt: "Sofi Fitness community moment",
   testimonials: [
     {
-      quote: "Finally, a fitness concept in Yerevan that feels global and personal at the same time.",
-      author: "Pop-up attendee"
+      quote: "This is exactly what Yerevan has been missing. I can't wait for the studio to open.",
+      author: "Sarah M., digital nomad"
     },
     {
-      quote: "The energy was incredible. I signed up on the spot.",
-      author: "Community member"
+      quote: "The pop-up class at the Cascade was incredible. Best workout I've had in Yerevan.",
+      author: "Armen K., repatriated diaspora"
     },
     {
-      quote: "Professional coaching, warm vibe, and serious programming.",
-      author: "Pilates class guest"
+      quote: "Finally, a fitness community for English speakers in Yerevan. This fills a huge gap.",
+      author: "Katya D., tech professional"
     }
   ],
   waitlistEyebrow: "Primary Conversion",
   waitlistTitle: "Join the Movement",
   waitlistSubtitle:
-    "Be the first to know when we open. Founding members get exclusive rates, priority booking, and VIP access to launch events.",
+    "Be the first to know when we open. Founding members get exclusive rates, priority booking, and VIP access to our launch events.",
   waitlistAlreadyPrefix: "Already",
   waitlistAlreadySuffix: "people on the waitlist",
-  footerTagline: "Hot yoga, barre, and reformer pilates. Coming soon.",
+  waitlistReferralPrompt: "Share with friends — move up the list!",
+  footerTagline: "Sofi Fitness — Move with Yerevan.",
+  footerInstagramCta: "Follow us on Instagram for class updates and Yerevan fitness content",
   privacyLabel: "Privacy Policy",
-  termsLabel: "Terms",
-  metaTitle: "Studio Yerevan — Hot Yoga, Barre & Pilates in Yerevan",
+  termsLabel: "Terms of Service",
+  cookieBannerText:
+    "We use cookies to improve your experience. By continuing, you agree to our Privacy Policy.",
+  cookieAcceptLabel: "Accept",
+  cookieDeclineLabel: "Decline",
+  metaTitle: "Sofi Fitness — Hot Yoga, Strength & Mobility in Yerevan",
   metaDescription:
-    "Yerevan's first English-friendly boutique fitness studio. Hot yoga, barre, and Pilates reformer classes in Kentron. Join the waitlist for founding member pricing."
+    "Yerevan's first English-friendly boutique fitness studio. Hot yoga, strength, mobility & recovery classes in Kentron. Join the waitlist for founding member pricing.",
+  ogTitle: "Sofi Fitness — Yerevan's First Boutique Fitness Studio",
+  ogDescription: "Hot yoga · Strength · Mobility & Recovery. Join the waitlist."
 };
 
 const hyContent: LandingContent = {
-  siteName: "Studio Yerevan",
+  siteName: "Sofi Fitness",
   cityLabel: "Երևան, Հայաստան",
   languageSelectorLabel: "Լեզու",
   languageNames,
+  instagramHandle: "studioyerevan",
+  instagramUrl: "https://instagram.com/studioyerevan",
+  telegramUrl: "https://t.me/studioyerevan",
+  facebookUrl: "https://facebook.com/studioyerevan",
   navLabels: {
-    concept: "Առաջարկ",
-    yerevanStory: "Պատմություն",
-    founder: "Համահիմնադիր",
+    about: "Մեր մասին",
+    classes: "Պարապմունքներ",
     pricing: "Գներ",
-    waitlist: "Սպասման ցուցակ"
+    join: "Միանալ"
   },
-  badge: "Երևանի առաջինը • Բացումը՝ 2026",
-  heroHeadline: "Շարժումը հանդիպում է լեռներին",
+  badge: "Երևանում առաջինը · Շուտով 2026",
+  heroHeadline: "Որտեղ շարժումը հանդիպում է լեռներին",
   heroSubheadline:
-    "Թեժ յոգա • Բարե • Ռեֆորմեր փիլատես — Երևանի առաջին անգլախոս բուտիկ ստուդիան։",
-  heroCta: "Միացեք սպասման ցուցակին",
-  classFormatsBadge: "Դասերի ձևաչափեր",
+    "Թեժ յոգա · Ուժային պարապմունքներ · Շարժունակություն և վերականգնում — Երևանի առաջին անգլերենալեզու բուտիկ ստուդիան",
+  heroCta: "Միանալ սպասման ցուցակին",
+  heroWaitlistPrefix: "",
+  heroWaitlistSuffix: "մարդ սպասման ցուցակում",
+  scrollIndicatorLabel: "Թերթեք՝ շարունակելու համար",
+  classFormatsBadge: "Ինչ ենք առաջարկում",
   conceptTitle: "Ինչ ենք առաջարկում",
-  conceptIntro:
-    "Մենք ստեղծում ենք մի բան, որը Երևանը դեռ չի տեսել՝ միջազգային համայնքի համար մտածված բուտիկ ֆիթնես տարածք։",
+  conceptIntro: "Թեժ յոգա, ուժային, շարժունակություն և վերականգնում, ինչպես նաև ծնող-երեխա ձևաչափ։",
   classCards: [
     {
       title: "Թեժ յոգա",
-      tagline: "Ջերմություն. Քրտինք. Փոփոխություն.",
-      description: "Հայաստանի միակ տաքացվող յոգայի ստուդիան։ 95°F, 60 րոպե, լիարժեք ազատում։",
+      tagline: "Տաքություն. Քրտինք. Փոխակերպում.",
+      description: "Հայաստանում միակ տաք յոգան։ 35°C, 60 րոպե, լիարժեք ազատում։",
       image: "/images/gallery/fitness-2.jpg",
       iframeSrc: cloudflareClassIframes.yoga
     },
     {
-      title: "Բարե",
-      tagline: "Նրբությունն ու ուժը միասին",
-      description: "Բալետից ներշնչված ձևաչափ։ Ամբողջ մարմնի ծանրաբեռնվածություն՝ առանց պարային փորձի։",
-      image: "/images/gallery/fitness-3.jpg",
-      iframeSrc: cloudflareClassIframes.barre
+      title: "Ուժի հիմունքներ",
+      tagline: "Կառուցիր հիմքից։",
+      description: "Ֆունկցիոնալ ուժային պարապմունքներ հանտելներով և սեփական քաշով։ Ճիշտ տեխնիկա։ Իրական արդյունքներ։",
+      image: "/images/gallery/fitness-3.jpg"
     },
     {
-      title: "Ռեֆորմեր փիլատես",
-      tagline: "Փոխիր ամեն ինչ",
-      description: "Խմբային ռեֆորմեր դասեր՝ իրենց տեսակի մեջ առաջինը Երևանում։",
-      image: "/images/gallery/fitness-4.jpg",
-      iframeSrc: cloudflareClassIframes.pilates
+      title: "Շարժունակություն և վերականգնում",
+      tagline: "Շարժվիր ավելի լավ։ Զգա ավելի լավ։",
+      description: "Խորը ձգումներ, միոֆասցիալ թուլացում, շնչառական աշխատանք։ Ձեր մարմնի վերաթողարկման կոճակը։",
+      image: "/images/gallery/fitness-4.jpg"
+    },
+    {
+      title: "Մամա/Պապա և երեխա",
+      tagline: "Միասին ավելի ուժեղ։",
+      description: "Ծնողի համար նախատեսված մարզում՝ երեխայի ինտեգրմամբ։ Կորի վերականգնում, ուժ, համայնք։",
+      image: "/images/gallery/fitness-6.jpg"
     }
   ],
+  conceptStoryParagraph:
+    "Մենք ստեղծում ենք մի բան, ինչ Երևանը դեռ չի տեսել՝ բուտիկ ֆիթնես տարածք միջազգային համայնքի համար։ Անգլերենով դասեր։ Համաշխարհային մակարդակի ձևաչափեր։ Ստուդիա, որը հիշեցնում է Նյու Յորքի, Լոնդոնի և Լոս Անջելեսի սիրելի ստուդիաները՝ Արարատի տեսարանով։",
   yerevanBadge: "Երևանի պատմությունը",
-  yerevanTitle: "Ծնված Երևանում։ Ստեղծված աշխարհի համար։",
+  yerevanTitle: "Ծնվել է Երևանում։ Ստեղծվել է աշխարհի համար։",
   yerevanBody:
-    "Երևանն այսօր արագ փոխվում է։ Միջազգային ու ստեղծարար համայնքը մեծանում է աշխարհի ամենահին քաղաքներից մեկում, և մենք շարժվում ենք դրա հետ միասին։",
+    "Երևանը հիմա ապրում է իր կարևոր պահը։ Ստեղծարար և միջազգային համայնքը աճում է աշխարհի ամենահին քաղաքներից մեկում։ Մենք այստեղ ենք՝ շարժվելու դրա հետ։",
   yerevanStats: [
-    { value: "70,000+", label: "Միջազգային բնակիչ Հայաստանում" },
-    { value: "0", label: "Թեժ յոգայի ստուդիա Երևանում" },
-    { value: "1", label: "Ստուդիա՝ բացվում է շուտով" }
+    { value: "70,000+", label: "արտասահմանցիներ" },
+    { value: "0", label: "բուտիկ ստուդիա" },
+    { value: "1", label: "շուտով" }
   ],
-  founderBadge: "Համահիմնադիր",
-  founderTitle: "Ծանոթացեք համահիմնադրին",
-  founderName: "Marzie Zare, Co-Founder & Lead Instructor",
+  founderBadge: "Ծանոթացեք հիմնադրին",
+  founderTitle: "Ծանոթացեք հիմնադրին",
+  founderName: "Marzie Zare, Founder & Lead Instructor",
   founderBio:
-    "Իրանից ծագումով և ներկայումս Վյուրզբուրգի համալսարանում սպորտի մագիստրոսական կրթություն ստանալով՝ Մարզին ստեղծում է այն ստուդիան, որը միշտ ուզել է տեսնել Երևանում՝ պրեմիում ձևաչափեր, ջերմ համայնք և միջազգային չափանիշներ։ Ստուդիան անվանվել է նրա դստեր՝ Սոֆիայի պատվին։",
-  founderQuote: "Իմ ամբողջ կարիերան մարդկանց ավելի լավ շարժվելուն օգնելու մասին է։ Երևանը արժանի է նման էներգիայով ստուդիայի։",
+    "Ֆիզիկական դաստիարակության կրթությամբ և մարզիչ ու անգլերենի դասավանդման տարիների փորձով՝ Մարզին իր կարիերան նվիրել է մարդկանց ավելի լավ շարժվելուն օգնելուն։ Նա համաշխարհային մակարդակի բուտիկ ֆիթնեսը բերում է Երևան, որովհետև այս քաղաքը և նրա աճող միջազգային համայնքը արժանի են դրան։",
+  founderQuote:
+    "Ես իմ կարիերան նվիրել եմ մարդկանց ավելի լավ շարժվելուն օգնելուն։ Երևանը արժանի է ստուդիայի, որը համապատասխանում է իր էներգիային։",
   founderCredentials: [
-    "Սպորտի մագիստրոս (ընթացքում)",
-    "Յոգայի սերտիֆիկացված հրահանգիչ",
-    "Բարեի հրահանգիչ",
-    "Ռեֆորմեր փիլատեսի սերտիֆիկացում",
-    "Անգլերենով մարզում"
+    "Ֆիզդաստիարակության դիպլոմ",
+    "Սերտիֆիկացված մարզիչ",
+    "Անգլերենի դասավանդում"
   ],
   pricingBadge: "Հիմնադիրների գներ",
   pricingTitle: "Հիմնադիր անդամակցության գներ",
-  spotsRemainingPrefix: "Մնացել է",
-  spotsRemainingSuffix: "հիմնադիր տեղ",
+  spotsRemainingPrefix: "Միայն",
+  spotsRemainingSuffix: "հիմնադիր տեղ է մնացել",
   pricingTiers: [
     {
-      name: "Վաղ գրանցման ավանդ",
-      price: "10,000 ֏ (վերադարձվող)",
+      name: "Վաղ ամրագրում",
+      price: "10,000 ֏ (վերադարձելի)",
       amountAmd: 10000,
       regularPrice: "—",
-      commitment: "Չկա",
-      perks: "Առաջնահերթ հասանելիություն + բացման ժամանակ կրեդիտ",
-      cta: "Ամրագրել տեղս"
+      commitment: "Առանց պարտավորության",
+      perks: "Առաջնահերթ մուտք + կրեդիտ բացման օրը",
+      cta: "Ամրագրել տեղը"
     },
     {
-      name: "Հիմնադիր 10 դաս",
+      name: "Հիմնադիր 10-փաթեթ",
       price: "36,000 ֏ (25% խնայողություն)",
       amountAmd: 36000,
       regularPrice: "48,000 ֏",
-      commitment: "Ժամկետանցում չկա",
-      perks: "Հիմնադիրի նշան, առաջնահերթ ամրագրում",
-      cta: "Ֆիքսել գինս",
-      featured: true
+      commitment: "Առանց ժամկետի",
+      perks: "Հիմնադիր անդամի նշան, առաջնահերթ ամրագրում",
+      cta: "Ամրագրել գինը"
     },
     {
       name: "Հիմնադիր անսահմանափակ",
@@ -368,12 +401,13 @@ const hyContent: LandingContent = {
       amountAmd: 39600,
       regularPrice: "60,000 ֏/ամիս",
       commitment: "Նվազագույնը 3 ամիս",
-      perks: "Անսահմանափակ դասեր, VIP միջոցառումներ, ցմահ գնի ֆիքսում",
-      cta: "Դառնալ հիմնադիր"
+      perks: "Բոլոր դասերը անսահմանափակ, VIP միջոցառումներ, գնի ցմահ ամրագրում",
+      cta: "Դառնալ հիմնադիր",
+      featured: true
     }
   ],
   pricingLabels: {
-    regularPrice: "Սովորական",
+    regularPrice: "Սովորական գին",
     commitment: "Պարտավորություն",
     perks: "Առավելություններ",
     featured: "Ամենապահանջված"
@@ -381,104 +415,122 @@ const hyContent: LandingContent = {
   socialBadge: "Համայնք",
   socialTitle: "Համայնքը շարժման մեջ",
   socialFollowLabel: "Հետևեք մեր ճանապարհին @studioyerevan",
-  socialGridImageAlt: "Ստուդիայի համայնքային պահ",
+  socialGridImageAlt: "Sofi Fitness համայնքի պահ",
   testimonials: [
     {
-      quote: "Վերջապես Երևանում մի ֆիթնես կոնցեպտ, որը և՛ միջազգային է, և՛ շատ անձնական։",
-      author: "Փոփ-ափի մասնակից"
+      quote: "Սա հենց այն է, ինչ Երևանին պակասում էր։ Անհամբեր սպասում եմ ստուդիայի բացմանը։",
+      author: "Սառա Մ., թվային նոմադ"
     },
     {
-      quote: "Էներգիան անհավանական էր։ Գրանցվեցի տեղում։",
-      author: "Համայնքի անդամ"
+      quote: "Կասկադի մոտ պոպ-ափ պարապմունքը հիանալի էր։ Երևանում ունեցածս լավագույն մարզումն էր։",
+      author: "Արմեն Կ., սփյուռքից վերադարձած"
     },
     {
-      quote: "Պրոֆեսիոնալ մոտեցում, ջերմ մթնոլորտ և ուժեղ ծրագիր։",
-      author: "Փիլատես դասի մասնակից"
+      quote: "Վերջապես անգլերեն խոսողների համար ֆիթնես համայնք Երևանում։ Սա լրացնում է մեծ բացը։",
+      author: "Կատյա Դ., տեխնոլոգիական մասնագետ"
     }
   ],
   waitlistEyebrow: "Հիմնական գրանցում",
   waitlistTitle: "Միացեք շարժմանը",
   waitlistSubtitle:
-    "Ստացեք առաջին տեղեկությունը բացման մասին։ Հիմնադիր անդամները ստանում են բացառիկ գներ, առաջնահերթ ամրագրում և VIP մուտք բացման միջոցառումներին։",
+    "Առաջինը իմացեք մեր բացման մասին։ Հիմնադիր անդամները կստանան բացառիկ գներ, առաջնահերթ ամրագրում և VIP մուտք բացման միջոցառումներին։",
   waitlistAlreadyPrefix: "Արդեն",
   waitlistAlreadySuffix: "մարդ սպասման ցուցակում",
-  footerTagline: "Թեժ յոգա, բարե և ռեֆորմեր փիլատես։ Շուտով։",
+  waitlistReferralPrompt: "Կիսվեք ընկերների հետ — բարձրացեք ցուցակում։",
+  footerTagline: "Sofi Fitness — Շարժվիր Երևանի հետ։",
+  footerInstagramCta: "Հետևեք մեզ Instagram-ում՝ դասերի թարմացումների և Երևանի ֆիթնես բովանդակության համար",
   privacyLabel: "Գաղտնիության քաղաքականություն",
-  termsLabel: "Պայմաններ",
-  metaTitle: "Studio Yerevan — Թեժ յոգա, բարե և փիլատես Երևանում",
+  termsLabel: "Ծառայության պայմաններ",
+  cookieBannerText:
+    "Մենք օգտագործում ենք cookie ֆայլեր՝ ձեր փորձը բարելավելու համար։ Շարունակելով՝ դուք համաձայնում եք մեր Գաղտնիության քաղաքականությանը։",
+  cookieAcceptLabel: "Ընդունել",
+  cookieDeclineLabel: "Մերժել",
+  metaTitle: "Sofi Fitness — Թեժ յոգա, ուժային և շարժունակություն Երևանում",
   metaDescription:
-    "Երևանի առաջին անգլախոս բուտիկ ֆիթնես ստուդիան։ Թեժ յոգա, բարե և ռեֆորմեր փիլատես։ Միացեք սպասման ցուցակին հիմնադիր անդամի հատուկ գներով։"
+    "Երևանի առաջին անգլերենալեզու բուտիկ ֆիթնես ստուդիան։ Թեժ յոգա, ուժային, շարժունակություն և վերականգնում Կենտրոնում։ Միացեք սպասման ցուցակին հիմնադիր գներով։",
+  ogTitle: "Sofi Fitness — Երևանի առաջին բուտիկ ֆիթնես ստուդիան",
+  ogDescription: "Թեժ յոգա · Ուժային · Շարժունակություն և վերականգնում։ Միացեք սպասման ցուցակին։"
 };
 
 const ruContent: LandingContent = {
-  siteName: "Studio Yerevan",
+  siteName: "Sofi Fitness",
   cityLabel: "Ереван, Армения",
   languageSelectorLabel: "Язык",
   languageNames,
+  instagramHandle: "studioyerevan",
+  instagramUrl: "https://instagram.com/studioyerevan",
+  telegramUrl: "https://t.me/studioyerevan",
+  facebookUrl: "https://facebook.com/studioyerevan",
   navLabels: {
-    concept: "Форматы",
-    yerevanStory: "История",
-    founder: "Сооснователь",
+    about: "О нас",
+    classes: "Занятия",
     pricing: "Цены",
-    waitlist: "Лист ожидания"
+    join: "Записаться"
   },
-  badge: "Первый в Ереване • Открытие в 2026",
-  heroHeadline: "Где движение встречается с горами",
+  badge: "Первый в Ереване · Открытие в 2026",
+  heroHeadline: "Где движение встречает горы",
   heroSubheadline:
-    "Hot yoga • Barre • Pilates Reformer — первая в Ереване бутик-студия с англоязычной средой.",
-  heroCta: "Вступить в лист ожидания",
-  classFormatsBadge: "Форматы занятий",
+    "Горячая йога · Силовые тренировки · Мобильность и восстановление — первая англоязычная бутик-студия Еревана",
+  heroCta: "Записаться в лист ожидания",
+  heroWaitlistPrefix: "",
+  heroWaitlistSuffix: "человек в листе ожидания",
+  scrollIndicatorLabel: "Листайте, чтобы узнать больше",
+  classFormatsBadge: "Наши направления",
   conceptTitle: "Что мы предлагаем",
-  conceptIntro:
-    "Мы создаем то, чего Ереван еще не видел: бутик-пространство для фитнеса, спроектированное для международного сообщества.",
+  conceptIntro: "Горячая йога, силовые, мобильность и восстановление, а также форматы для родителей с малышом.",
   classCards: [
     {
-      title: "Hot Yoga",
-      tagline: "Тепло. Пот. Трансформация.",
-      description: "Единственная горячая йога-студия в Армении. 95°F, 60 минут, полная перезагрузка.",
+      title: "Горячая йога",
+      tagline: "Жар. Пот. Трансформация.",
+      description: "Единственная горячая йога в Армении. 35°C, 60 минут, полное освобождение.",
       image: "/images/gallery/fitness-2.jpg",
       iframeSrc: cloudflareClassIframes.yoga
     },
     {
-      title: "Barre",
-      tagline: "Грация и сила",
-      description: "Вдохновлено балетом. Интенсивная нагрузка на все тело. Опыт танцев не нужен.",
-      image: "/images/gallery/fitness-3.jpg",
-      iframeSrc: cloudflareClassIframes.barre
+      title: "Силовые основы",
+      tagline: "Строй с нуля.",
+      description: "Функциональная силовая тренировка с гантелями и собственным весом. Правильная техника. Реальный результат.",
+      image: "/images/gallery/fitness-3.jpg"
     },
     {
-      title: "Pilates Reformer",
-      tagline: "Переосмысли движение",
-      description: "Групповые занятия на реформере — впервые в Ереване.",
-      image: "/images/gallery/fitness-4.jpg",
-      iframeSrc: cloudflareClassIframes.pilates
+      title: "Мобильность и восстановление",
+      tagline: "Двигайся лучше. Чувствуй себя лучше.",
+      description: "Глубокая растяжка, миофасциальный релиз, дыхательные практики. Кнопка перезагрузки вашего тела.",
+      image: "/images/gallery/fitness-4.jpg"
+    },
+    {
+      title: "Мама/Папа и малыш",
+      tagline: "Сильнее вместе.",
+      description: "Фитнес для родителей с малышом. Восстановление кора, сила, сообщество.",
+      image: "/images/gallery/fitness-6.jpg"
     }
   ],
+  conceptStoryParagraph:
+    "Мы создаем то, чего Ереван еще не видел — бутик-фитнес пространство для международного сообщества. Занятия на английском. Форматы мирового уровня. Студия, которая напоминает те, что вы любили в Нью-Йорке, Лондоне или Лос-Анджелесе — но с видом на Арарат.",
   yerevanBadge: "История Еревана",
-  yerevanTitle: "Рождено в Ереване. Создано для мира.",
+  yerevanTitle: "Родился в Ереване. Создан для мира.",
   yerevanBody:
-    "Ереван переживает особый момент. Международное и креативное сообщество растет в одном из древнейших городов мира, и мы двигаемся вместе с ним.",
+    "Ереван переживает особый момент. Креативное международное сообщество растет в одном из древнейших городов мира. Мы здесь, чтобы двигаться вместе с ним.",
   yerevanStats: [
-    { value: "70,000+", label: "Экспатов в Армении" },
-    { value: "0", label: "Студий hot yoga в Ереване" },
-    { value: "1", label: "Студия скоро откроется" }
+    { value: "70,000+", label: "экспатов" },
+    { value: "0", label: "бутик-студий" },
+    { value: "1", label: "уже скоро" }
   ],
-  founderBadge: "Сооснователь",
-  founderTitle: "Познакомьтесь с сооснователем",
-  founderName: "Marzie Zare, Co-Founder & Lead Instructor",
+  founderBadge: "Познакомьтесь с основательницей",
+  founderTitle: "Познакомьтесь с основательницей",
+  founderName: "Marzie Zare, Founder & Lead Instructor",
   founderBio:
-    "Марзи родом из Ирана и сейчас получает степень магистра спорта в Университете Вюрцбурга. Она создает в Ереване студию, которую всегда хотела видеть: премиальные форматы, теплое сообщество и глобальные стандарты. Студия названа в честь ее дочери Софии.",
-  founderQuote: "Всю карьеру я помогаю людям двигаться лучше. Ереван заслуживает студию с таким же уровнем энергии.",
+    "С дипломом в области физического воспитания и многолетним опытом работы инструктором и преподавателем английского языка Марзи посвятила карьеру тому, чтобы помогать людям двигаться лучше. Она приносит бутик-фитнес мирового уровня в Ереван, потому что этот город и его растущее международное сообщество этого заслуживают.",
+  founderQuote:
+    "Я посвятила свою карьеру тому, чтобы помогать людям двигаться лучше. Ереван заслуживает студию, которая соответствует его энергии.",
   founderCredentials: [
-    "Магистр спорта (в процессе)",
-    "Сертифицированный инструктор по йоге",
-    "Инструктор barre",
-    "Сертификация Pilates Reformer",
-    "Тренировки на английском языке"
+    "Диплом по физическому воспитанию",
+    "Сертифицированный инструктор",
+    "Преподаватель английского языка"
   ],
   pricingBadge: "Цены для основателей",
   pricingTitle: "Тарифы founding members",
-  spotsRemainingPrefix: "Осталось",
+  spotsRemainingPrefix: "Осталось всего",
   spotsRemainingSuffix: "мест для основателей",
   pricingTiers: [
     {
@@ -486,66 +538,74 @@ const ruContent: LandingContent = {
       price: "10,000 ֏ (возвратный)",
       amountAmd: 10000,
       regularPrice: "—",
-      commitment: "Нет",
+      commitment: "Без обязательств",
       perks: "Приоритетный доступ + кредит при открытии",
       cta: "Забронировать место"
     },
     {
-      name: "Founding 10-Pack",
-      price: "36,000 ֏ (экономия 25%)",
+      name: "Пакет основателя: 10 занятий",
+      price: "36,000 ֏ (скидка 25%)",
       amountAmd: 36000,
       regularPrice: "48,000 ֏",
       commitment: "Без срока действия",
-      perks: "Значок founding member, приоритетное бронирование",
-      cta: "Зафиксировать цену",
-      featured: true
+      perks: "Значок основателя, приоритетная запись",
+      cta: "Зафиксировать цену"
     },
     {
-      name: "Founding Unlimited",
-      price: "39,600 ֏/мес (экономия 34%)",
+      name: "Безлимит основателя",
+      price: "39,600 ֏/мес. (скидка 34%)",
       amountAmd: 39600,
-      regularPrice: "60,000 ֏/мес",
+      regularPrice: "60,000 ֏/мес.",
       commitment: "Минимум 3 месяца",
-      perks: "Безлимитные занятия, VIP-события, пожизненная фиксация цены",
-      cta: "Стать основателем"
+      perks: "Все занятия без ограничений, VIP-мероприятия, пожизненная фиксация цены",
+      cta: "Стать основателем",
+      featured: true
     }
   ],
   pricingLabels: {
     regularPrice: "Обычная цена",
     commitment: "Обязательства",
     perks: "Преимущества",
-    featured: "Популярный выбор"
+    featured: "Самый популярный"
   },
   socialBadge: "Сообщество",
   socialTitle: "Сообщество в движении",
-  socialFollowLabel: "Следите за нашим запуском @studioyerevan",
-  socialGridImageAlt: "Момент из сообщества студии",
+  socialFollowLabel: "Следите за нашим путём @studioyerevan",
+  socialGridImageAlt: "Момент сообщества Sofi Fitness",
   testimonials: [
     {
-      quote: "Наконец-то в Ереване фитнес-концепт, который одновременно международный и по-настоящему личный.",
-      author: "Гость pop-up мероприятия"
+      quote: "Это именно то, чего не хватало Еревану. Жду не дождусь открытия студии.",
+      author: "Sarah M., digital nomad"
     },
     {
-      quote: "Энергия была невероятной. Я записался сразу на месте.",
-      author: "Участник сообщества"
+      quote: "Поп-ап занятие у Каскада было невероятным. Лучшая тренировка, которая у меня была в Ереване.",
+      author: "Armen K., repatriated diaspora"
     },
     {
-      quote: "Профессиональный подход, теплая атмосфера и сильная программа.",
-      author: "Гость занятия Pilates"
+      quote: "Наконец-то фитнес-сообщество для англоговорящих в Ереване. Это закрывает огромный пробел.",
+      author: "Katya D., tech professional"
     }
   ],
   waitlistEyebrow: "Главная конверсия",
   waitlistTitle: "Присоединяйтесь к движению",
   waitlistSubtitle:
-    "Узнайте первыми о дате открытия. Участники founding-списка получают специальные цены, приоритетное бронирование и VIP-доступ к launch-событиям.",
+    "Будьте первыми, кто узнает об открытии. Основатели получат эксклюзивные цены, приоритетную запись и VIP-доступ к нашим launch-мероприятиям.",
   waitlistAlreadyPrefix: "Уже",
   waitlistAlreadySuffix: "человек в листе ожидания",
-  footerTagline: "Hot yoga, barre и reformer pilates. Скоро открытие.",
+  waitlistReferralPrompt: "Поделитесь с друзьями — поднимитесь в списке!",
+  footerTagline: "Sofi Fitness — Двигайся с Ереваном.",
+  footerInstagramCta: "Подписывайтесь на наш Instagram для новостей о занятиях и фитнес-контента из Еревана",
   privacyLabel: "Политика конфиденциальности",
   termsLabel: "Условия использования",
-  metaTitle: "Studio Yerevan — Hot Yoga, Barre и Pilates в Ереване",
+  cookieBannerText:
+    "Мы используем файлы cookie для улучшения вашего опыта. Продолжая, вы соглашаетесь с нашей Политикой конфиденциальности.",
+  cookieAcceptLabel: "Принять",
+  cookieDeclineLabel: "Отклонить",
+  metaTitle: "Sofi Fitness — Горячая йога, силовые и мобильность в Ереване",
   metaDescription:
-    "Первая в Ереване англоязычная бутик-студия фитнеса. Hot yoga, barre и reformer pilates. Вступите в лист ожидания и получите цены для founding members."
+    "Первая англоязычная бутик-фитнес студия Еревана. Горячая йога, силовые, мобильность и восстановление в Кентроне. Запишитесь в лист ожидания по ценам основателей.",
+  ogTitle: "Sofi Fitness — Первая бутик-фитнес студия Еревана",
+  ogDescription: "Горячая йога · Силовые · Мобильность и восстановление. Записывайтесь."
 };
 
 export const contentByLocale: Record<Locale, LandingContent> = {

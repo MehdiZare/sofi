@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/next";
 import PosthogProvider from "@/components/shared/PosthogProvider";
 import TrackingScripts from "@/components/shared/TrackingScripts";
@@ -7,9 +6,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofia.fitness"),
-  title: "Studio Yerevan",
+  title: "Sofi Fitness",
   description:
-    "Yerevan's first English-friendly boutique fitness studio. Hot yoga, barre, and Pilates reformer classes.",
+    "Yerevan's first English-friendly boutique fitness studio. Hot yoga, strength, mobility, and recovery classes.",
   robots: {
     index: true,
     follow: true
@@ -21,9 +20,7 @@ type RootLayoutProps = {
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
-  const page = (
+  return (
     <html lang="en">
       <body className="bg-bg text-text antialiased">
         <TrackingScripts />
@@ -32,15 +29,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Analytics />
       </body>
     </html>
-  );
-
-  if (!clerkPublishableKey) {
-    return page;
-  }
-
-  return (
-    <ClerkProvider publishableKey={clerkPublishableKey}>
-      {page}
-    </ClerkProvider>
   );
 }

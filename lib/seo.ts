@@ -2,9 +2,9 @@ export function buildLocalBusinessStructuredData(baseUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "HealthClub",
-    name: "Studio Yerevan",
+    name: "Sofi Fitness",
     description:
-      "Yerevan's first English-friendly boutique fitness studio offering hot yoga, barre, and Pilates reformer.",
+      "Yerevan's first English-friendly boutique fitness studio offering hot yoga, strength, mobility, and recovery.",
     areaServed: "Yerevan, Armenia",
     address: {
       "@type": "PostalAddress",

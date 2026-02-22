@@ -34,7 +34,7 @@ export default function Concept({ content }: ConceptProps) {
     <section id={SECTION_IDS.concept} data-track-section={SECTION_IDS.concept} className="section-shell py-24 md:py-32">
       <SectionHeader badge={content.classFormatsBadge} title={content.conceptTitle} description={content.conceptIntro} />
 
-      <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-4">
         {content.classCards.map((card) => {
           const hasIframe = Boolean(card.iframeSrc);
           const iframeSrcWithHiddenControls = withHiddenCloudflareControls(card.iframeSrc);
@@ -43,7 +43,7 @@ export default function Concept({ content }: ConceptProps) {
               src={card.image}
               alt={`${card.title} class`}
               fill
-              sizes="(max-width: 768px) 100vw, 33vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
               className="object-cover"
             />
           ) : (
@@ -75,6 +75,10 @@ export default function Concept({ content }: ConceptProps) {
           );
         })}
       </div>
+
+      <p className="mx-auto mt-10 max-w-5xl text-pretty text-center text-lg text-text-muted">
+        {content.conceptStoryParagraph}
+      </p>
     </section>
   );
 }

@@ -30,3 +30,19 @@ export function resolveLocale(input?: string | null): Locale {
 
   return defaultLocale;
 }
+
+export function replacePathLocale(pathname: string, locale: Locale): string {
+  const normalized = pathname.startsWith("/") ? pathname : `/${pathname}`;
+  const segments = normalized.split("/");
+
+  if (segments.length > 1 && isLocale(segments[1] ?? "")) {
+    segments[1] = locale;
+    return segments.join("/") || `/${locale}`;
+  }
+
+  if (normalized === "/") {
+    return `/${locale}`;
+  }
+
+  return `/${locale}${normalized}`;
+}

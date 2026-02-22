@@ -3,18 +3,19 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { withHiddenCloudflareControls } from "@/lib/video";
 
 type BackgroundVideoProps = {
   posterSrc: string;
-  desktopSrc: string;
-  mobileSrc?: string;
+  desktopIframeSrc?: string;
+  mobileIframeSrc?: string;
   className?: string;
 };
 
 export default function BackgroundVideo({
   posterSrc,
-  desktopSrc,
-  mobileSrc,
+  desktopIframeSrc,
+  mobileIframeSrc,
   className
 }: BackgroundVideoProps) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -30,7 +31,7 @@ export default function BackgroundVideo({
 
     mediaQuery.addEventListener("change", updateMobileState);
 
-    if (reducedMotion.matches || mediaQuery.matches) {
+    if (reducedMotion.matches) {
       return () => {
         mediaQuery.removeEventListener("change", updateMobileState);
       };
@@ -56,7 +57,8 @@ export default function BackgroundVideo({
     };
   }, []);
 
-  const source = isMobile && mobileSrc ? mobileSrc : desktopSrc;
+  const iframeSrc = isMobile && mobileIframeSrc ? mobileIframeSrc : desktopIframeSrc;
+  const iframeSrcWithHiddenControls = withHiddenCloudflareControls(iframeSrc);
 
   return (
     <div ref={wrapperRef} className={cn("relative overflow-hidden", className)}>
@@ -69,18 +71,14 @@ export default function BackgroundVideo({
         className="object-cover"
         sizes="100vw"
       />
-      {canLoadVideo ? (
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          poster={posterSrc}
-        >
-          <source src={source} type="video/mp4" />
-        </video>
+      {canLoadVideo && iframeSrcWithHiddenControls ? (
+        <iframe
+          src={iframeSrcWithHiddenControls}
+          loading="lazy"
+          allow="autoplay; encrypted-media;"
+          title="Studio teaser video"
+          className="absolute inset-0 h-full w-full border-0"
+        />
       ) : null}
     </div>
   );

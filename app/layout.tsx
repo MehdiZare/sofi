@@ -5,7 +5,7 @@ import TrackingScripts from "@/components/shared/TrackingScripts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://studioyerevan.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofia.fitness"),
   title: "Studio Yerevan",
   description:
     "Yerevan's first English-friendly boutique fitness studio. Hot yoga, barre, and Pilates reformer classes.",

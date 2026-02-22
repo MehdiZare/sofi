@@ -28,7 +28,7 @@ export default async function LocalePage({ params }: LocalePageProps) {
   const waitlistStats = await getWaitlistStats();
 
   const structuredData = buildLocalBusinessStructuredData(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://studioyerevan.com"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofia.fitness"
   );
 
   return (
@@ -37,16 +37,23 @@ export default async function LocalePage({ params }: LocalePageProps) {
         <ReferralCapture />
       </Suspense>
       <SectionViewTracker locale={locale} />
-      <Navigation ctaLabel={content.heroCta} />
+      <Navigation
+        locale={locale}
+        siteName={content.siteName}
+        ctaLabel={content.heroCta}
+        navLabels={content.navLabels}
+        languageNames={content.languageNames}
+        languageSelectorLabel={content.languageSelectorLabel}
+      />
 
-      <Hero content={content} waitlistCount={waitlistStats.count} />
-      <Concept locale={locale} />
-      <YerevanStory locale={locale} />
-      <Founder locale={locale} />
-      <Pricing waitlistCount={waitlistStats.count} />
-      <SocialProof locale={locale} />
-      <WaitlistSection content={content} waitlistCount={waitlistStats.count} />
-      <Footer content={content} />
+      <Hero content={content} />
+      <Concept content={content} />
+      <YerevanStory content={content} />
+      <Founder content={content} />
+      <Pricing content={content} waitlistCount={waitlistStats.count} />
+      <SocialProof content={content} />
+      <WaitlistSection content={content} />
+      <Footer locale={locale} content={content} />
 
       <script
         id="local-business-schema"

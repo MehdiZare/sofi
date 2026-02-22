@@ -33,3 +33,7 @@ coverage
 *.temp
 *.tsbuildinfo
 .vercel
+
+# raw assets
+assets/
+.env*.local

@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --font-display: "Playfair Display", "Iowan Old Style", "Baskerville", serif;
+  --font-body: "DM Sans", "Avenir Next", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", "Consolas", monospace;
+  --color-primary: #c8553d;
+  --color-primary-hover: #a8432f;
+  --color-secondary: #e8a87c;
+  --color-bg: #0a0a0a;
+  --color-surface: #1a1a1a;
+  --color-surface-elevated: #2d2d2d;
+  --color-text: #f7f3ef;
+  --color-text-muted: #8b8b8b;
+  --color-accent-warm: #d4a574;
+}
+
+* {
+  border-color: rgb(255 255 255 / 0.08);
+}
+
+html,
+body {
+  min-height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  font-family: var(--font-body), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), serif;
+  letter-spacing: -0.01em;
+}
+
+code,
+pre,
+.mono {
+  font-family: var(--font-mono), monospace;
+}
+
+.section-shell {
+  position: relative;
+  overflow: hidden;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .section-shell {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes subtle-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-subtle-float {
+  animation: subtle-float 3.2s ease-in-out infinite;
+}

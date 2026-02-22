@@ -1,0 +1,68 @@
+version: "3"
+
+silent: true
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmd: task --list
+
+  install:
+    desc: Install dependencies
+    cmd: bun install
+
+  dev:
+    desc: Start Next.js dev server locally
+    cmd: bun run dev
+
+  build:
+    desc: Build production bundle
+    cmd: bun run build
+
+  start:
+    desc: Start production server (after build)
+    cmd: bun run start
+
+  lint:
+    desc: Run ESLint
+    cmd: bun run lint
+
+  typecheck:
+    desc: Run TypeScript type checking
+    cmd: bun run typecheck
+
+  test:
+    desc: Run unit tests
+    cmd: bun run test
+
+  test:basic:
+    desc: Run basic verification (lint + typecheck + test + build)
+    cmds:
+      - task lint
+      - task typecheck
+      - task test
+      - task build
+
+  vercel:link:
+    desc: Link local project to Vercel
+    cmd: vercel link --yes
+
+  vercel:pull:dev:
+    desc: Pull Vercel preview environment vars locally
+    cmd: vercel pull --yes --environment=preview
+
+  vercel:pull:prod:
+    desc: Pull Vercel production environment vars locally
+    cmd: vercel pull --yes --environment=production
+
+  deploy:dev:
+    desc: Deploy preview build to Vercel (dev)
+    cmd: vercel deploy --yes
+
+  deploy:prod:
+    desc: Deploy production build to Vercel
+    cmd: vercel deploy --prod --yes
+
+  clean:
+    desc: Remove build artifacts and caches
+    cmd: rm -rf .next node_modules tsconfig.tsbuildinfo

@@ -24,9 +24,9 @@ export const emailSequenceByLocale: Record<Locale, EmailSequenceContent> = {
         "Four formats, one studio. Hot Yoga: 95°F heated room, 60-minute flows for deep detox and flexibility. Strength Fundamentals: dumbbells, bodyweight, proper form — build real, functional strength. Mobility & Recovery: deep stretching, myofascial release, breath work — your body's weekly reset. Mom/Dad & Baby: parent-friendly fitness with baby right beside you. All classes taught in English. Located in Kentron. Founding members get locked-in rates that never go up."
     },
     day7: {
-      subject: "Bring a friend, move up the list",
+      subject: "Share this with a friend",
       body:
-        "Know someone who'd love boutique fitness in Yerevan? Share your unique link and both of you move up the waitlist. Your referral link: {{referral_link}}. Every friend who joins bumps you closer to founding member status."
+        "Know someone who'd love boutique fitness in Yerevan? Share your unique link with them. Your referral link: {{referral_link}}."
     }
   },
   hy: {
@@ -41,9 +41,9 @@ export const emailSequenceByLocale: Record<Locale, EmailSequenceContent> = {
         "Չորս ձևաչափ, մեկ ստուդիա։ Թեժ յոգա՝ 35°C տաքացված սենյակ, 60 րոպեանոց հոսքեր խորը դետոքսի և ճկունության համար։ Ուժի հիմունքներ՝ հանտելներ, մարմնի քաշ, ճիշտ տեխնիկա — իրական ֆունկցիոնալ ուժ։ Շարժունակություն և վերականգնում՝ խորը ձգումներ, միոֆասցիալ թուլացում, շնչառական աշխատանք — ձեր մարմնի շաբաթական վերագործարկում։ Մամա/Պապա + երեխա՝ ծնողի համար ֆիթնես, երեխան ձեր կողքին։ Բոլոր պարապմունքները անգլերենով։ Տեղակայումը՝ Կենտրոն։ Հիմնադիր անդամները ստանում են գներ, որոնք երբեք չեն թանկանա։"
     },
     day7: {
-      subject: "Բերեք ընկերոջ, բարձրացեք ցուցակում",
+      subject: "Կիսվեք ընկերոջ հետ",
       body:
-        "Գիտե՞ք մեկին, ով կսիրի բուտիկ ֆիթնեսը Երևանում։ Կիսվեք ձեր յուրահատուկ հղումով և երկուսդ էլ կբարձրանաք ցուցակում։ Ձեր ռեֆերալ հղումը՝ {{referral_link}}։ Յուրաքանչյուր միացած ընկեր ձեզ մոտեցնում է հիմնադիր անդամի կարգավիճակին։"
+        "Գիտե՞ք մեկին, ով կսիրի բուտիկ ֆիթնեսը Երևանում։ Կիսվեք նրա հետ ձեր յուրահատուկ հղումով։ Ձեր ռեֆերալ հղումը՝ {{referral_link}}։"
     }
   },
   ru: {
@@ -58,9 +58,9 @@ export const emailSequenceByLocale: Record<Locale, EmailSequenceContent> = {
         "Четыре формата, одна студия. Горячая йога: нагретый зал до 35°C, 60-минутные практики для глубокого детокса и гибкости. Силовые основы: гантели, собственный вес, правильная техника — реальная функциональная сила. Мобильность и восстановление: глубокая растяжка, миофасциальный релиз, дыхательные практики — еженедельная перезагрузка для тела. Мама/Папа + малыш: фитнес для родителей, малыш рядом. Все занятия на английском языке. Расположение: Кентрон. Основатели получают фиксированные цены, которые никогда не вырастут."
     },
     day7: {
-      subject: "Приведи друга — поднимись в списке",
+      subject: "Поделитесь с другом",
       body:
-        "Знаете кого-то, кому понравится бутик-фитнес в Ереване? Поделитесь своей уникальной ссылкой, и вы оба подниметесь в листе ожидания. Ваша реферальная ссылка: {{referral_link}}. Каждый новый участник приближает вас к статусу основателя."
+        "Знаете кого-то, кому понравится бутик-фитнес в Ереване? Поделитесь с ним своей уникальной ссылкой. Ваша реферальная ссылка: {{referral_link}}."
     }
   }
 };

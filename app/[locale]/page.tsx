@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import { contentByLocale, SECTION_IDS } from "@/lib/constants";
 import { buildLocalBusinessStructuredData } from "@/lib/seo";
 import { defaultLocale, isLocale } from "@/lib/i18n";
-import { getWaitlistStats } from "@/lib/waitlist";
 import Navigation from "@/components/shared/Navigation";
 import Hero from "@/components/sections/Hero";
 import ReferralCapture from "@/components/shared/ReferralCapture";
@@ -26,7 +25,6 @@ export default async function LocalePage({ params }: LocalePageProps) {
   const { locale: localeParam } = await params;
   const locale = isLocale(localeParam) ? localeParam : defaultLocale;
   const content = contentByLocale[locale];
-  const waitlistStats = await getWaitlistStats();
 
   const structuredData = buildLocalBusinessStructuredData(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofia.fitness"
@@ -47,13 +45,13 @@ export default async function LocalePage({ params }: LocalePageProps) {
         languageSelectorLabel={content.languageSelectorLabel}
       />
 
-      <Hero content={content} waitlistCount={waitlistStats.count} />
+      <Hero content={content} />
       <Concept content={content} />
       <YerevanStory content={content} />
       <Founder content={content} />
-      <Pricing content={content} waitlistCount={waitlistStats.count} locale={locale} />
+      <Pricing content={content} locale={locale} />
       <SocialProof content={content} />
-      <WaitlistSection content={content} waitlistCount={waitlistStats.count} />
+      <WaitlistSection content={content} />
       <Footer locale={locale} content={content} />
       <CookieConsent
         text={content.cookieBannerText}

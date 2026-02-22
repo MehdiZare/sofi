@@ -1,15 +1,13 @@
 import BackgroundBeams from "@/components/aceternity/background-beams";
 import Vortex from "@/components/aceternity/vortex";
 import WaitlistForm from "@/components/shared/WaitlistForm";
-import WaitlistCounter from "@/components/shared/WaitlistCounter";
 import { SECTION_IDS, type LandingContent } from "@/lib/constants";
 
 type WaitlistSectionProps = {
   content: LandingContent;
-  waitlistCount: number;
 };
 
-export default function WaitlistSection({ content, waitlistCount }: WaitlistSectionProps) {
+export default function WaitlistSection({ content }: WaitlistSectionProps) {
   return (
     <section
       id={SECTION_IDS.waitlist}
@@ -26,13 +24,6 @@ export default function WaitlistSection({ content, waitlistCount }: WaitlistSect
           <div className="mt-10">
             <WaitlistForm />
           </div>
-
-          <p className="mt-6 text-sm text-text-muted">
-            {content.waitlistAlreadyPrefix}{" "}
-            <WaitlistCounter initialCount={waitlistCount} className="mx-1 font-semibold text-accent-warm" />
-            {" "}{content.waitlistAlreadySuffix}
-          </p>
-          <p className="mt-3 text-sm text-text-muted">{content.waitlistReferralPrompt}</p>
         </div>
       </Vortex>
     </section>

@@ -6,17 +6,15 @@ import BackgroundBeams from "@/components/aceternity/background-beams";
 import TextGenerateEffect from "@/components/aceternity/text-generate-effect";
 import BackgroundVideo from "@/components/shared/BackgroundVideo";
 import ScrollIndicator from "@/components/shared/ScrollIndicator";
-import WaitlistCounter from "@/components/shared/WaitlistCounter";
 import { Button } from "@/components/ui/button";
 import Badge from "@/components/ui/badge";
 import { SECTION_IDS, type LandingContent } from "@/lib/constants";
 
 type HeroProps = {
   content: LandingContent;
-  waitlistCount: number;
 };
 
-export default function Hero({ content, waitlistCount }: HeroProps) {
+export default function Hero({ content }: HeroProps) {
   const desktopCloudflareIframeSrc =
     process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_DESKTOP_IFRAME_URL ??
     "https://customer-bvw30n7zlfevs367.cloudflarestream.com/65929572aefd9680dbee8d0210b37839/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F65929572aefd9680dbee8d0210b37839%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600";
@@ -74,12 +72,6 @@ export default function Hero({ content, waitlistCount }: HeroProps) {
             <a href={`#${SECTION_IDS.waitlist}`}>
               <Button size="xl">{content.heroCta}</Button>
             </a>
-          </div>
-
-          <div className="mt-6 rounded-full border border-white/20 bg-black/30 px-4 py-2 text-sm text-text">
-            {content.heroWaitlistPrefix ? `${content.heroWaitlistPrefix} ` : null}
-            <WaitlistCounter initialCount={waitlistCount} className="mx-1 font-semibold text-accent-warm" />
-            {" "}{content.heroWaitlistSuffix}
           </div>
 
           <div className="mt-10 md:mt-16">

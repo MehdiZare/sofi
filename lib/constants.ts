@@ -71,8 +71,6 @@ export type LandingContent = {
   heroHeadline: string;
   heroSubheadline: string;
   heroCta: string;
-  heroWaitlistPrefix: string;
-  heroWaitlistSuffix: string;
   scrollIndicatorLabel: string;
   classFormatsBadge: string;
   conceptTitle: string;
@@ -91,8 +89,6 @@ export type LandingContent = {
   founderCredentials: readonly string[];
   pricingBadge: string;
   pricingTitle: string;
-  spotsRemainingPrefix: string;
-  spotsRemainingSuffix: string;
   pricingTiers: readonly PricingTier[];
   pricingLabels: PricingLabels;
   socialBadge: string;
@@ -103,9 +99,6 @@ export type LandingContent = {
   waitlistEyebrow: string;
   waitlistTitle: string;
   waitlistSubtitle: string;
-  waitlistAlreadyPrefix: string;
-  waitlistAlreadySuffix: string;
-  waitlistReferralPrompt: string;
   footerTagline: string;
   footerInstagramCta: string;
   privacyLabel: string;
@@ -160,8 +153,6 @@ const enContent: LandingContent = {
   heroSubheadline:
     "Hot yoga · Strength · Mobility & Recovery — Yerevan's first English-friendly boutique studio",
   heroCta: "Join the Waitlist",
-  heroWaitlistPrefix: "",
-  heroWaitlistSuffix: "people on the waitlist",
   scrollIndicatorLabel: "Scroll to explore",
   classFormatsBadge: "What We Offer",
   conceptTitle: "What We Offer",
@@ -218,8 +209,6 @@ const enContent: LandingContent = {
   ],
   pricingBadge: "Founding Rates",
   pricingTitle: "Founding Member Pricing",
-  spotsRemainingPrefix: "Only",
-  spotsRemainingSuffix: "founding spots remaining",
   pricingTiers: [
     {
       name: "Early Bird Deposit",
@@ -278,9 +267,6 @@ const enContent: LandingContent = {
   waitlistTitle: "Join the Movement",
   waitlistSubtitle:
     "Be the first to know when we open. Founding members get exclusive rates, priority booking, and VIP access to our launch events.",
-  waitlistAlreadyPrefix: "Already",
-  waitlistAlreadySuffix: "people on the waitlist",
-  waitlistReferralPrompt: "Share with friends — move up the list!",
   footerTagline: "Sofi Fitness — Move with Yerevan.",
   footerInstagramCta: "Follow us on Instagram for class updates and Yerevan fitness content",
   privacyLabel: "Privacy Policy",
@@ -316,8 +302,6 @@ const hyContent: LandingContent = {
   heroSubheadline:
     "Թեժ յոգա · Ուժային պարապմունքներ · Շարժունակություն և վերականգնում — Երևանի առաջին անգլերենալեզու բուտիկ ստուդիան",
   heroCta: "Միանալ սպասման ցուցակին",
-  heroWaitlistPrefix: "",
-  heroWaitlistSuffix: "մարդ սպասման ցուցակում",
   scrollIndicatorLabel: "Թերթեք՝ շարունակելու համար",
   classFormatsBadge: "Ինչ ենք առաջարկում",
   conceptTitle: "Ինչ ենք առաջարկում",
@@ -374,8 +358,6 @@ const hyContent: LandingContent = {
   ],
   pricingBadge: "Հիմնադիրների գներ",
   pricingTitle: "Հիմնադիր անդամակցության գներ",
-  spotsRemainingPrefix: "Միայն",
-  spotsRemainingSuffix: "հիմնադիր տեղ է մնացել",
   pricingTiers: [
     {
       name: "Վաղ ամրագրում",
@@ -434,9 +416,6 @@ const hyContent: LandingContent = {
   waitlistTitle: "Միացեք շարժմանը",
   waitlistSubtitle:
     "Առաջինը իմացեք մեր բացման մասին։ Հիմնադիր անդամները կստանան բացառիկ գներ, առաջնահերթ ամրագրում և VIP մուտք բացման միջոցառումներին։",
-  waitlistAlreadyPrefix: "Արդեն",
-  waitlistAlreadySuffix: "մարդ սպասման ցուցակում",
-  waitlistReferralPrompt: "Կիսվեք ընկերների հետ — բարձրացեք ցուցակում։",
   footerTagline: "Sofi Fitness — Շարժվիր Երևանի հետ։",
   footerInstagramCta: "Հետևեք մեզ Instagram-ում՝ դասերի թարմացումների և Երևանի ֆիթնես բովանդակության համար",
   privacyLabel: "Գաղտնիության քաղաքականություն",
@@ -472,8 +451,6 @@ const ruContent: LandingContent = {
   heroSubheadline:
     "Горячая йога · Силовые тренировки · Мобильность и восстановление — первая англоязычная бутик-студия Еревана",
   heroCta: "Записаться в лист ожидания",
-  heroWaitlistPrefix: "",
-  heroWaitlistSuffix: "человек в листе ожидания",
   scrollIndicatorLabel: "Листайте, чтобы узнать больше",
   classFormatsBadge: "Наши направления",
   conceptTitle: "Что мы предлагаем",
@@ -530,8 +507,6 @@ const ruContent: LandingContent = {
   ],
   pricingBadge: "Цены для основателей",
   pricingTitle: "Тарифы founding members",
-  spotsRemainingPrefix: "Осталось всего",
-  spotsRemainingSuffix: "мест для основателей",
   pricingTiers: [
     {
       name: "Ранний депозит",
@@ -590,9 +565,6 @@ const ruContent: LandingContent = {
   waitlistTitle: "Присоединяйтесь к движению",
   waitlistSubtitle:
     "Будьте первыми, кто узнает об открытии. Основатели получат эксклюзивные цены, приоритетную запись и VIP-доступ к нашим launch-мероприятиям.",
-  waitlistAlreadyPrefix: "Уже",
-  waitlistAlreadySuffix: "человек в листе ожидания",
-  waitlistReferralPrompt: "Поделитесь с друзьями — поднимитесь в списке!",
   footerTagline: "Sofi Fitness — Двигайся с Ереваном.",
   footerInstagramCta: "Подписывайтесь на наш Instagram для новостей о занятиях и фитнес-контента из Еревана",
   privacyLabel: "Политика конфиденциальности",

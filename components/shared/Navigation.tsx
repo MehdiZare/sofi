@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Suspense } from "react";
 import LanguageSelector from "@/components/shared/LanguageSelector";
 import { SECTION_IDS, getNavItems, type NavLabels } from "@/lib/constants";
 import type { Locale } from "@/lib/i18n";
@@ -45,7 +46,15 @@ export default function Navigation({
         </nav>
 
         <div className="flex items-center gap-2">
-          <LanguageSelector locale={locale} languageNames={languageNames} label={languageSelectorLabel} />
+          <Suspense
+            fallback={
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-3 py-2 text-xs text-text">
+                <span className="mono uppercase tracking-[0.12em] text-accent-warm">{locale}</span>
+              </div>
+            }
+          >
+            <LanguageSelector locale={locale} languageNames={languageNames} label={languageSelectorLabel} />
+          </Suspense>
           <a href={`#${SECTION_IDS.waitlist}`}>
             <Button size="sm">{ctaLabel}</Button>
           </a>

@@ -9,6 +9,7 @@ type BackgroundVideoProps = {
   posterSrc: string;
   desktopIframeSrc?: string;
   mobileIframeSrc?: string;
+  mobileCover?: boolean;
   className?: string;
 };
 
@@ -16,6 +17,7 @@ export default function BackgroundVideo({
   posterSrc,
   desktopIframeSrc,
   mobileIframeSrc,
+  mobileCover = false,
   className
 }: BackgroundVideoProps) {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -59,6 +61,9 @@ export default function BackgroundVideo({
 
   const iframeSrc = isMobile && mobileIframeSrc ? mobileIframeSrc : desktopIframeSrc;
   const iframeSrcWithHiddenControls = withHiddenCloudflareControls(iframeSrc);
+  const iframeClassName = mobileCover
+    ? "absolute inset-0 h-full w-full border-0 max-md:inset-auto max-md:left-1/2 max-md:top-1/2 max-md:h-full max-md:w-auto max-md:max-w-none max-md:-translate-x-1/2 max-md:-translate-y-1/2 max-md:[aspect-ratio:16/9]"
+    : "absolute inset-0 h-full w-full border-0";
 
   return (
     <div ref={wrapperRef} className={cn("relative overflow-hidden", className)}>
@@ -77,7 +82,7 @@ export default function BackgroundVideo({
           loading="lazy"
           allow="autoplay; encrypted-media;"
           title="Studio teaser video"
-          className="absolute inset-0 h-full w-full border-0"
+          className={iframeClassName}
         />
       ) : null}
     </div>

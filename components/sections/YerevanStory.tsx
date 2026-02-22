@@ -14,6 +14,8 @@ export default function YerevanStory({ content }: YerevanStoryProps) {
   const yerevanStoryCloudflareIframeSrc =
     process.env.NEXT_PUBLIC_CLOUDFLARE_YEREVAN_STORY_IFRAME_URL ??
     "https://customer-bvw30n7zlfevs367.cloudflarestream.com/597e3a7394521edbd9b067a34c6de54d/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F597e3a7394521edbd9b067a34c6de54d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600";
+  const yerevanStoryMobileCloudflareIframeSrc =
+    process.env.NEXT_PUBLIC_CLOUDFLARE_YEREVAN_STORY_MOBILE_IFRAME_URL;
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -37,6 +39,8 @@ export default function YerevanStory({ content }: YerevanStoryProps) {
           <BackgroundVideo
             posterSrc="/images/gallery/fitness-5.jpg"
             desktopIframeSrc={yerevanStoryCloudflareIframeSrc}
+            mobileIframeSrc={yerevanStoryMobileCloudflareIframeSrc}
+            mobileCover
             className="absolute inset-0"
           />
         </motion.div>

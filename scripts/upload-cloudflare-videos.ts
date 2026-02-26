@@ -122,7 +122,7 @@ function buildIframeUrl(customerSubdomain: string, streamId: string): string {
     `https://${normalizedCustomerSubdomain}/${streamId}/thumbnails/thumbnail.jpg?time=&height=600`
   );
 
-  return `https://${normalizedCustomerSubdomain}/${streamId}/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=${poster}`;
+  return `https://${normalizedCustomerSubdomain}/${streamId}/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false&poster=${poster}`;
 }
 
 function upsertEnvVar(envContent: string, key: string, value: string): string {

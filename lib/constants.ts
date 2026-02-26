@@ -149,7 +149,7 @@ function buildCloudflareIframeUrl(streamId: string): string {
     `https://${cloudflareHost}/${streamId}/thumbnails/thumbnail.jpg?time=&height=600`
   );
 
-  return `https://${cloudflareHost}/${streamId}/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=${poster}`;
+  return `https://${cloudflareHost}/${streamId}/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false&poster=${poster}`;
 }
 
 const cloudflareClassStreams = {

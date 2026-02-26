@@ -6,6 +6,7 @@ import { classSlugOrder, getLocalizedClass, getLocalizedClassGroups, isClassSlug
 import { contentByLocale } from "@/lib/constants";
 import { defaultLocale, isLocale, locales, type Locale } from "@/lib/i18n";
 import { buildBreadcrumbStructuredData, buildClassStructuredData } from "@/lib/seo";
+import { withHiddenCloudflareControls } from "@/lib/video";
 import JsonLd from "@/components/shared/JsonLd";
 import InnerNavigation from "@/components/shared/InnerNavigation";
 
@@ -155,6 +156,7 @@ export default async function ClassDetailPage({ params }: ClassDetailPageProps) 
   const classGroups = getLocalizedClassGroups(locale);
   const currentGroup = classGroups.find((group) => group.slug === fitnessClass.groupSlug);
   const related = currentGroup?.classes.filter((candidate) => candidate.slug !== fitnessClass.slug).slice(0, 3) ?? [];
+  const iframeSrcWithHiddenControls = withHiddenCloudflareControls(fitnessClass.iframeSrc);
 
   const classSchemas = buildClassStructuredData(locale, baseUrl, fitnessClass);
   const breadcrumbSchema = buildBreadcrumbStructuredData([
@@ -204,16 +206,16 @@ export default async function ClassDetailPage({ params }: ClassDetailPageProps) 
           </section>
 
           <section className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black">
-            {fitnessClass.iframeSrc ? (
+            {iframeSrcWithHiddenControls ? (
               <iframe
-                src={fitnessClass.iframeSrc}
+                src={iframeSrcWithHiddenControls}
                 loading="lazy"
                 title={`${fitnessClass.title} preview`}
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
                 className="absolute inset-0 h-full w-full border-0"
               />
             ) : fitnessClass.fallbackVideoSrc ? (
-              <video className="h-full w-full object-cover" controls playsInline preload="metadata" poster={fitnessClass.image}>
+              <video className="h-full w-full object-cover" autoPlay loop muted playsInline preload="metadata" poster={fitnessClass.image}>
                 <source src={fitnessClass.fallbackVideoSrc} type="video/mp4" />
               </video>
             ) : (

@@ -92,7 +92,7 @@ function buildCloudflareIframeUrl(streamId: string): string {
     `https://${host}/${streamId}/thumbnails/thumbnail.jpg?time=&height=600`
   );
 
-  return `https://${host}/${streamId}/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=${poster}`;
+  return `https://${host}/${streamId}/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false&poster=${poster}`;
 }
 
 const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {

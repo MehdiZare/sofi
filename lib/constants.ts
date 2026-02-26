@@ -153,11 +153,11 @@ function buildCloudflareIframeUrl(streamId: string): string {
 }
 
 const cloudflareClassStreams = {
-  hotPowerFlow: process.env.NEXT_PUBLIC_CLOUDFLARE_HOT_POWER_FLOW_STREAM_ID ?? "95b81e9a4d68843fc8ab01c5fc9744d3",
-  dumbbellSculpt: process.env.NEXT_PUBLIC_CLOUDFLARE_DUMBBELL_SCULPT_STREAM_ID ?? "fcee7d418598a3a33699a640ecc06c3d",
+  hotPowerFlow: process.env.NEXT_PUBLIC_CLOUDFLARE_HOT_POWER_FLOW_STREAM_ID ?? "b0df2d9ced432615b29302fb6b30cf9d",
+  dumbbellSculpt: process.env.NEXT_PUBLIC_CLOUDFLARE_DUMBBELL_SCULPT_STREAM_ID ?? "18ce772a06872ca6353e3ad9e57bed67",
   babyMeFoundations:
-    process.env.NEXT_PUBLIC_CLOUDFLARE_BABY_ME_FOUNDATIONS_STREAM_ID ?? "c15f0eb1c556e42b5c28b3a98c650a52",
-  mobilityReset: process.env.NEXT_PUBLIC_CLOUDFLARE_MOBILITY_RESET_STREAM_ID ?? "412998a84f9b404d78c4063c33346d5f"
+    process.env.NEXT_PUBLIC_CLOUDFLARE_BABY_ME_FOUNDATIONS_STREAM_ID ?? "47c10b3289b69dff2340325f693af189",
+  mobilityReset: process.env.NEXT_PUBLIC_CLOUDFLARE_MOBILITY_RESET_STREAM_ID ?? "c2ce3e1a6e52c2bd4f3ed3c2feb165b9"
 } as const;
 
 const cloudflareClassIframes = {

@@ -8,6 +8,11 @@ type FounderProps = {
 };
 
 export default function Founder({ content }: FounderProps) {
+  const reorderedGallery =
+    content.founderGallery.length > 1
+      ? [...content.founderGallery.slice(1), content.founderGallery[0]]
+      : content.founderGallery;
+
   return (
     <section id={SECTION_IDS.founder} data-track-section={SECTION_IDS.founder} className="section-shell py-24 md:py-32">
       <SectionHeader badge={content.founderBadge} title={content.founderTitle} />
@@ -30,7 +35,7 @@ export default function Founder({ content }: FounderProps) {
         <blockquote className="border-l-2 border-primary pl-4 text-xl italic text-text">&ldquo;{content.founderQuote}&rdquo;</blockquote>
 
         <div className="grid grid-cols-3 gap-3">
-          {content.founderGallery.map((galleryImage) => (
+          {reorderedGallery.map((galleryImage) => (
             <div key={galleryImage.src} className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10">
               <Image
                 src={galleryImage.src}

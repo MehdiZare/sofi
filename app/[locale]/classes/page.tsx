@@ -5,6 +5,7 @@ import { contentByLocale } from "@/lib/constants";
 import { defaultLocale, isLocale, locales, type Locale } from "@/lib/i18n";
 import { buildBreadcrumbStructuredData, buildClassGroupItemListStructuredData } from "@/lib/seo";
 import JsonLd from "@/components/shared/JsonLd";
+import InnerNavigation from "@/components/shared/InnerNavigation";
 
 type ClassesIndexPageProps = {
   params: Promise<{ locale: string }>;
@@ -117,45 +118,55 @@ export default async function ClassesIndexPage({ params }: ClassesIndexPageProps
   ]);
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-6xl px-6 py-20 text-text">
-      <Link href={`/${locale}`} className="mono text-xs uppercase tracking-[0.14em] text-accent-warm hover:text-text">
-        {getBackLabel(locale)}
-      </Link>
+    <>
+      <InnerNavigation
+        locale={locale}
+        siteName={content.siteName}
+        ctaLabel={content.heroCta}
+        navLabels={content.navLabels}
+        languageNames={content.languageNames}
+        languageSelectorLabel={content.languageSelectorLabel}
+      />
+      <main className="mx-auto min-h-screen w-full max-w-6xl px-6 pb-20 pt-28 text-text">
+        <Link href={`/${locale}`} className="mono text-xs uppercase tracking-[0.14em] text-accent-warm hover:text-text">
+          {getBackLabel(locale)}
+        </Link>
 
-      <h1 className="mt-4 text-balance text-4xl font-extrabold">{getPageTitle(locale)}</h1>
-      <p className="mt-4 max-w-3xl text-text-muted">{getPageDescription(locale)}</p>
+        <h1 className="mt-4 text-balance text-4xl font-extrabold">{getPageTitle(locale)}</h1>
+        <p className="mt-4 max-w-3xl text-text-muted">{getPageDescription(locale)}</p>
 
-      <div className="mt-12 space-y-10">
-        {classGroups.map((group) => (
-          <section key={group.slug} className="space-y-4">
-            <header>
-              <h2 className="text-2xl font-bold">{group.title}</h2>
-              <p className="mt-1 text-text-muted">{group.description}</p>
-            </header>
+        <div className="mt-12 space-y-10">
+          {classGroups.map((group) => (
+            <section key={group.slug} className="space-y-4">
+              <header>
+                <h2 className="text-2xl font-bold">{group.title}</h2>
+                <p className="mt-1 text-text-muted">{group.description}</p>
+              </header>
 
-            <ul className="grid gap-4 md:grid-cols-2">
-              {group.classes.map((fitnessClass) => (
-                <li key={fitnessClass.slug}>
-                  <Link
-                    href={`/${locale}/classes/${fitnessClass.slug}`}
-                    className="block rounded-2xl border border-white/10 bg-surface p-5 transition hover:border-accent-warm/70"
-                  >
-                    <p className="mono text-xs uppercase tracking-[0.12em] text-accent-warm">
-                      {getDurationLabel(locale, fitnessClass.durationMinutes)} · {fitnessClass.intensityLabel}
-                    </p>
-                    <h3 className="mt-2 text-xl font-semibold">{fitnessClass.title}</h3>
-                    <p className="mt-2 text-sm text-text-muted">{fitnessClass.subtitle}</p>
-                    <p className="mt-3 text-sm text-text-muted">{fitnessClass.description}</p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
+              <ul className="grid gap-4 md:grid-cols-2">
+                {group.classes.map((fitnessClass) => (
+                  <li key={fitnessClass.slug}>
+                    <Link
+                      href={`/${locale}/classes/${fitnessClass.slug}`}
+                      className="block rounded-2xl border border-white/10 bg-surface p-5 transition hover:border-accent-warm/70"
+                    >
+                      <p className="mono text-xs uppercase tracking-[0.12em] text-accent-warm">
+                        {getDurationLabel(locale, fitnessClass.durationMinutes)} · {fitnessClass.intensityLabel}
+                      </p>
+                      <h3 className="mt-2 text-xl font-semibold">{fitnessClass.title}</h3>
+                      <p className="mt-2 text-sm text-text-muted">{fitnessClass.subtitle}</p>
+                      <p className="mt-3 text-sm text-text-muted">{fitnessClass.description}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
 
-      <JsonLd id="classes-list-schema" data={classListSchema} />
-      <JsonLd id="classes-list-breadcrumb-schema" data={breadcrumbSchema} />
-    </main>
+        <JsonLd id="classes-list-schema" data={classListSchema} />
+        <JsonLd id="classes-list-breadcrumb-schema" data={breadcrumbSchema} />
+      </main>
+    </>
   );
 }

@@ -23,6 +23,7 @@ export type ClassSlug = (typeof classSlugOrder)[number];
 type ClassVideoConfig = {
   sourceRelativePath: string;
   streamEnvBase: string;
+  fallbackStreamId: string;
   fallbackVideoSrc?: string;
 };
 
@@ -105,6 +106,7 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     video: {
       sourceRelativePath: "docs/Website/1.Hot Yoga/Hot Power Flow.mp4",
       streamEnvBase: "HOT_POWER_FLOW",
+      fallbackStreamId: "b0df2d9ced432615b29302fb6b30cf9d",
       fallbackVideoSrc: "/videos/classes/hot-power-flow.mp4"
     }
   },
@@ -117,7 +119,8 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     image: "/images/gallery/fitness-2.jpg",
     video: {
       sourceRelativePath: "docs/Website/1.Hot Yoga/Hot Yoga + Sculpt.mp4",
-      streamEnvBase: "HOT_YOGA_SCULPT"
+      streamEnvBase: "HOT_YOGA_SCULPT",
+      fallbackStreamId: "cfc36f3cddc2cf706e40ad2098f21abd"
     }
   },
   "dumbbell-sculpt": {
@@ -130,6 +133,7 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     video: {
       sourceRelativePath: "docs/Website/2.STRENGTH FUNDAMENTALS/Dumbbell Sculpt.mp4",
       streamEnvBase: "DUMBBELL_SCULPT",
+      fallbackStreamId: "18ce772a06872ca6353e3ad9e57bed67",
       fallbackVideoSrc: "/videos/classes/dumbbell-sculpt.mp4"
     }
   },
@@ -142,7 +146,8 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     image: "/images/gallery/fitness-3.jpg",
     video: {
       sourceRelativePath: "docs/Website/2.STRENGTH FUNDAMENTALS/Core + Glutes.mp4",
-      streamEnvBase: "CORE_GLUTES"
+      streamEnvBase: "CORE_GLUTES",
+      fallbackStreamId: "e4fc5322393966be6614bcee35942e94"
     }
   },
   "upper-body-posture": {
@@ -154,7 +159,8 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     image: "/images/gallery/fitness-3.jpg",
     video: {
       sourceRelativePath: "docs/Website/2.STRENGTH FUNDAMENTALS/Upper Body + Posture.mp4",
-      streamEnvBase: "UPPER_BODY_POSTURE"
+      streamEnvBase: "UPPER_BODY_POSTURE",
+      fallbackStreamId: "80de4bb6b361be9fdf55a39e0c67c289"
     }
   },
   "baby-me-foundations": {
@@ -167,6 +173,7 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     video: {
       sourceRelativePath: "docs/Website/3.MOM_DAD + BABY/Baby + Me Foundations2.mp4",
       streamEnvBase: "BABY_ME_FOUNDATIONS",
+      fallbackStreamId: "47c10b3289b69dff2340325f693af189",
       fallbackVideoSrc: "/videos/classes/baby-me-foundations.mp4"
     }
   },
@@ -179,7 +186,8 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     image: "/images/gallery/fitness-6.jpg",
     video: {
       sourceRelativePath: "docs/Website/3.MOM_DAD + BABY/Baby + Me Strong2.mp4",
-      streamEnvBase: "BABY_ME_STRONG"
+      streamEnvBase: "BABY_ME_STRONG",
+      fallbackStreamId: "b356d2028cbe09d060a415252b2718a2"
     }
   },
   "mobility-reset": {
@@ -192,6 +200,7 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     video: {
       sourceRelativePath: "docs/Website/4.MOBILITY + RECOVERY/Mobility Reset.mp4",
       streamEnvBase: "MOBILITY_RESET",
+      fallbackStreamId: "c2ce3e1a6e52c2bd4f3ed3c2feb165b9",
       fallbackVideoSrc: "/videos/classes/mobility-reset.mp4"
     }
   },
@@ -204,7 +213,8 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     image: "/images/gallery/fitness-4.jpg",
     video: {
       sourceRelativePath: "docs/Website/4.MOBILITY + RECOVERY/Deep Stretch Restore.mp4",
-      streamEnvBase: "DEEP_STRETCH_RESTORE"
+      streamEnvBase: "DEEP_STRETCH_RESTORE",
+      fallbackStreamId: "af2bd4639fcb5a715a949d2c89f48866"
     }
   },
   "yin-release": {
@@ -216,7 +226,8 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     image: "/images/gallery/fitness-4.jpg",
     video: {
       sourceRelativePath: "docs/Website/4.MOBILITY + RECOVERY/Yin + Release.mp4",
-      streamEnvBase: "YIN_RELEASE"
+      streamEnvBase: "YIN_RELEASE",
+      fallbackStreamId: "f29152e5af09ab1e4bd6f59e726f7e58"
     }
   },
   "recovery-flow": {
@@ -228,7 +239,8 @@ const classStaticBySlug: Record<ClassSlug, ClassStaticConfig> = {
     image: "/images/gallery/fitness-4.jpg",
     video: {
       sourceRelativePath: "docs/Website/4.MOBILITY + RECOVERY/Recovery Flow.mp4",
-      streamEnvBase: "RECOVERY_FLOW"
+      streamEnvBase: "RECOVERY_FLOW",
+      fallbackStreamId: "143b08bc88996c5be2dbc45fbe03e2f2"
     }
   }
 };
@@ -664,7 +676,8 @@ const classCopyByLocale: Record<Locale, Record<ClassSlug, ClassLocaleCopy>> = {
 
 function resolveClassStream(slug: ClassSlug): { streamId?: string; iframeSrc?: string } {
   const config = classStaticBySlug[slug];
-  const streamId = process.env[`NEXT_PUBLIC_CLOUDFLARE_${config.video.streamEnvBase}_STREAM_ID`]?.trim();
+  const streamIdFromEnv = process.env[`NEXT_PUBLIC_CLOUDFLARE_${config.video.streamEnvBase}_STREAM_ID`]?.trim();
+  const streamId = streamIdFromEnv || config.video.fallbackStreamId;
   const iframeFromEnv = process.env[`NEXT_PUBLIC_CLOUDFLARE_${config.video.streamEnvBase}_IFRAME_URL`]?.trim();
 
   if (iframeFromEnv) {

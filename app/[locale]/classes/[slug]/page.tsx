@@ -7,6 +7,7 @@ import { contentByLocale } from "@/lib/constants";
 import { defaultLocale, isLocale, locales, type Locale } from "@/lib/i18n";
 import { buildBreadcrumbStructuredData, buildClassStructuredData } from "@/lib/seo";
 import JsonLd from "@/components/shared/JsonLd";
+import InnerNavigation from "@/components/shared/InnerNavigation";
 
 type ClassDetailPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -163,84 +164,94 @@ export default async function ClassDetailPage({ params }: ClassDetailPageProps) 
   ]);
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-20 text-text">
-      <Link href={`/${locale}/classes`} className="mono text-xs uppercase tracking-[0.14em] text-accent-warm hover:text-text">
-        {getBackToClassesLabel(locale)}
-      </Link>
+    <>
+      <InnerNavigation
+        locale={locale}
+        siteName={content.siteName}
+        ctaLabel={content.heroCta}
+        navLabels={content.navLabels}
+        languageNames={content.languageNames}
+        languageSelectorLabel={content.languageSelectorLabel}
+      />
+      <main className="mx-auto min-h-screen w-full max-w-5xl px-6 pb-20 pt-28 text-text">
+        <Link href={`/${locale}/classes`} className="mono text-xs uppercase tracking-[0.14em] text-accent-warm hover:text-text">
+          {getBackToClassesLabel(locale)}
+        </Link>
 
-      <article className="mt-6 space-y-8">
-        <header className="space-y-4">
-          <p className="mono text-xs uppercase tracking-[0.12em] text-accent-warm">{currentGroup?.title}</p>
-          <h1 className="text-balance text-4xl font-extrabold">{fitnessClass.title}</h1>
-          <p className="text-xl text-text-muted">{fitnessClass.subtitle}</p>
-          <p className="text-text-muted">{fitnessClass.description}</p>
-        </header>
+        <article className="mt-6 space-y-8">
+          <header className="space-y-4">
+            <p className="mono text-xs uppercase tracking-[0.12em] text-accent-warm">{currentGroup?.title}</p>
+            <h1 className="text-balance text-4xl font-extrabold">{fitnessClass.title}</h1>
+            <p className="text-xl text-text-muted">{fitnessClass.subtitle}</p>
+            <p className="text-text-muted">{fitnessClass.description}</p>
+          </header>
 
-        <div className="grid gap-4 rounded-2xl border border-white/10 bg-surface p-5 md:grid-cols-3">
-          <p className="text-sm text-text-muted">{facts.duration}</p>
-          <p className="text-sm text-text-muted">{facts.intensity}</p>
-          <p className="text-sm text-text-muted">{facts.heat}</p>
-        </div>
+          <div className="grid gap-4 rounded-2xl border border-white/10 bg-surface p-5 md:grid-cols-3">
+            <p className="text-sm text-text-muted">{facts.duration}</p>
+            <p className="text-sm text-text-muted">{facts.intensity}</p>
+            <p className="text-sm text-text-muted">{facts.heat}</p>
+          </div>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">{getBenefitsLabel(locale)}</h2>
-          <ul className="space-y-3">
-            {fitnessClass.benefits.map((benefit) => (
-              <li key={benefit} className="rounded-xl border border-white/10 bg-surface px-4 py-3 text-text-muted">
-                {benefit}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black">
-          {fitnessClass.iframeSrc ? (
-            <iframe
-              src={fitnessClass.iframeSrc}
-              loading="lazy"
-              title={`${fitnessClass.title} preview`}
-              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-              className="absolute inset-0 h-full w-full border-0"
-            />
-          ) : fitnessClass.fallbackVideoSrc ? (
-            <video className="h-full w-full object-cover" controls playsInline preload="metadata" poster={fitnessClass.image}>
-              <source src={fitnessClass.fallbackVideoSrc} type="video/mp4" />
-            </video>
-          ) : (
-            <Image
-              src={fitnessClass.image}
-              alt={`${fitnessClass.title} class preview`}
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
-          )}
-        </section>
-
-        {related.length > 0 ? (
           <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">{currentGroup?.title}</h2>
-            <ul className="grid gap-4 md:grid-cols-3">
-              {related.map((candidate) => (
-                <li key={candidate.slug}>
-                  <Link
-                    href={`/${locale}/classes/${candidate.slug}`}
-                    className="block h-full rounded-2xl border border-white/10 bg-surface p-4 transition hover:border-accent-warm/70"
-                  >
-                    <h3 className="font-semibold">{candidate.title}</h3>
-                    <p className="mt-2 text-sm text-text-muted">{candidate.subtitle}</p>
-                  </Link>
+            <h2 className="text-2xl font-semibold">{getBenefitsLabel(locale)}</h2>
+            <ul className="space-y-3">
+              {fitnessClass.benefits.map((benefit) => (
+                <li key={benefit} className="rounded-xl border border-white/10 bg-surface px-4 py-3 text-text-muted">
+                  {benefit}
                 </li>
               ))}
             </ul>
           </section>
-        ) : null}
-      </article>
 
-      {classSchemas.map((schema, index) => (
-        <JsonLd key={index} id={`class-schema-${index}`} data={schema} />
-      ))}
-      <JsonLd id="class-breadcrumb-schema" data={breadcrumbSchema} />
-    </main>
+          <section className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black">
+            {fitnessClass.iframeSrc ? (
+              <iframe
+                src={fitnessClass.iframeSrc}
+                loading="lazy"
+                title={`${fitnessClass.title} preview`}
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                className="absolute inset-0 h-full w-full border-0"
+              />
+            ) : fitnessClass.fallbackVideoSrc ? (
+              <video className="h-full w-full object-cover" controls playsInline preload="metadata" poster={fitnessClass.image}>
+                <source src={fitnessClass.fallbackVideoSrc} type="video/mp4" />
+              </video>
+            ) : (
+              <Image
+                src={fitnessClass.image}
+                alt={`${fitnessClass.title} class preview`}
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+            )}
+          </section>
+
+          {related.length > 0 ? (
+            <section className="space-y-4">
+              <h2 className="text-2xl font-semibold">{currentGroup?.title}</h2>
+              <ul className="grid gap-4 md:grid-cols-3">
+                {related.map((candidate) => (
+                  <li key={candidate.slug}>
+                    <Link
+                      href={`/${locale}/classes/${candidate.slug}`}
+                      className="block h-full rounded-2xl border border-white/10 bg-surface p-4 transition hover:border-accent-warm/70"
+                    >
+                      <h3 className="font-semibold">{candidate.title}</h3>
+                      <p className="mt-2 text-sm text-text-muted">{candidate.subtitle}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+        </article>
+
+        {classSchemas.map((schema, index) => (
+          <JsonLd key={index} id={`class-schema-${index}`} data={schema} />
+        ))}
+        <JsonLd id="class-breadcrumb-schema" data={breadcrumbSchema} />
+      </main>
+    </>
   );
 }

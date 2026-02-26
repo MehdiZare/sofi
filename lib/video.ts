@@ -28,3 +28,27 @@ export function withHiddenCloudflareControls(src?: string): string | undefined {
     return hash ? `${withControlsHidden}#${hash}` : withControlsHidden;
   }
 }
+
+export function withCloudflareHoverPlaybackParams(src?: string): string | undefined {
+  if (!src) {
+    return undefined;
+  }
+
+  try {
+    const url = new URL(src);
+
+    if (!url.hostname.endsWith(CLOUDFLARE_STREAM_HOST_SUFFIX)) {
+      return src;
+    }
+
+    url.searchParams.set("controls", "false");
+    url.searchParams.set("muted", "true");
+    url.searchParams.set("loop", "true");
+    url.searchParams.set("preload", "true");
+    url.searchParams.delete("autoplay");
+
+    return url.toString();
+  } catch {
+    return src;
+  }
+}

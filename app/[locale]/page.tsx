@@ -1,9 +1,11 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import { getLocalizedClassGroups } from "@/lib/classes";
 import { contentByLocale, SECTION_IDS } from "@/lib/constants";
-import { buildLocalBusinessStructuredData } from "@/lib/seo";
+import { buildHomepageStructuredData } from "@/lib/seo";
 import { defaultLocale, isLocale } from "@/lib/i18n";
 import Navigation from "@/components/shared/Navigation";
+import JsonLd from "@/components/shared/JsonLd";
 import Hero from "@/components/sections/Hero";
 import ReferralCapture from "@/components/shared/ReferralCapture";
 import SectionViewTracker from "@/components/shared/SectionViewTracker";
@@ -25,9 +27,14 @@ export default async function LocalePage({ params }: LocalePageProps) {
   const { locale: localeParam } = await params;
   const locale = isLocale(localeParam) ? localeParam : defaultLocale;
   const content = contentByLocale[locale];
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofi.fitness";
+  const classGroups = getLocalizedClassGroups(locale);
 
-  const structuredData = buildLocalBusinessStructuredData(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofia.fitness"
+  const structuredData = buildHomepageStructuredData(
+    locale,
+    baseUrl,
+    content.metaDescription,
+    classGroups
   );
 
   return (
@@ -46,7 +53,7 @@ export default async function LocalePage({ params }: LocalePageProps) {
       />
 
       <Hero content={content} />
-      <Concept content={content} />
+      <Concept locale={locale} content={content} />
       <YerevanStory content={content} />
       <Founder content={content} />
       <Pricing content={content} locale={locale} />
@@ -59,11 +66,9 @@ export default async function LocalePage({ params }: LocalePageProps) {
         declineLabel={content.cookieDeclineLabel}
       />
 
-      <script
-        id="local-business-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      {structuredData.map((schema, index) => (
+        <JsonLd key={index} id={`homepage-schema-${index}`} data={schema} />
+      ))}
 
       <a
         href={`#${SECTION_IDS.waitlist}`}

@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "cloudflare:upload:classes": "bun scripts/upload-cloudflare-videos.ts",
+    "seo:audit": "bun scripts/seo-audit.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.38.1",

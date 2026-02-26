@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   const ogTitle = content.ogTitle;
   const ogDescription = content.ogDescription;
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofia.fitness";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofi.fitness";
 
   return {
     title,

@@ -22,11 +22,19 @@ export type NavLabels = {
 };
 
 export type ClassCard = {
+  groupSlug: "hot-yoga" | "strength-fundamentals" | "mobility-recovery" | "mom-dad-baby";
   title: string;
   tagline: string;
   description: string;
   image: string;
+  videoSrc?: string;
+  streamId?: string;
   iframeSrc?: string;
+};
+
+export type FounderGalleryImage = {
+  src: string;
+  alt: string;
 };
 
 export type PricingTier = {
@@ -87,6 +95,7 @@ export type LandingContent = {
   founderBio: string;
   founderQuote: string;
   founderCredentials: readonly string[];
+  founderGallery: readonly FounderGalleryImage[];
   pricingBadge: string;
   pricingTitle: string;
   pricingTiers: readonly PricingTier[];
@@ -118,10 +127,53 @@ const languageNames: Record<Locale, string> = {
   ru: "Русский"
 };
 
+const DEFAULT_CLOUDFLARE_STREAM_CUSTOMER_HOST = "customer-bvw30n7zlfevs367.cloudflarestream.com";
+
+function resolveCloudflareStreamCustomerHost(): string {
+  const configuredHost =
+    process.env.CLOUDFLARE_CUSTOMER_SUBDOMAIN?.trim() ||
+    process.env.NEXT_PUBLIC_CLOUDFLARE_CUSTOMER_SUBDOMAIN?.trim();
+
+  if (!configuredHost) {
+    return DEFAULT_CLOUDFLARE_STREAM_CUSTOMER_HOST;
+  }
+
+  return configuredHost.endsWith(".cloudflarestream.com")
+    ? configuredHost
+    : `${configuredHost}.cloudflarestream.com`;
+}
+
+function buildCloudflareIframeUrl(streamId: string): string {
+  const cloudflareHost = resolveCloudflareStreamCustomerHost();
+  const poster = encodeURIComponent(
+    `https://${cloudflareHost}/${streamId}/thumbnails/thumbnail.jpg?time=&height=600`
+  );
+
+  return `https://${cloudflareHost}/${streamId}/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=${poster}`;
+}
+
+const cloudflareClassStreams = {
+  hotPowerFlow: process.env.NEXT_PUBLIC_CLOUDFLARE_HOT_POWER_FLOW_STREAM_ID ?? "95b81e9a4d68843fc8ab01c5fc9744d3",
+  dumbbellSculpt: process.env.NEXT_PUBLIC_CLOUDFLARE_DUMBBELL_SCULPT_STREAM_ID ?? "fcee7d418598a3a33699a640ecc06c3d",
+  babyMeFoundations:
+    process.env.NEXT_PUBLIC_CLOUDFLARE_BABY_ME_FOUNDATIONS_STREAM_ID ?? "c15f0eb1c556e42b5c28b3a98c650a52",
+  mobilityReset: process.env.NEXT_PUBLIC_CLOUDFLARE_MOBILITY_RESET_STREAM_ID ?? "412998a84f9b404d78c4063c33346d5f"
+} as const;
+
 const cloudflareClassIframes = {
-  yoga:
+  hotPowerFlow:
+    process.env.NEXT_PUBLIC_CLOUDFLARE_HOT_POWER_FLOW_IFRAME_URL ??
     process.env.NEXT_PUBLIC_CLOUDFLARE_YOGA_IFRAME_URL ??
-    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/d77a8add3d38d5b5cf48ff9af23b2597/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Fd77a8add3d38d5b5cf48ff9af23b2597%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+    buildCloudflareIframeUrl(cloudflareClassStreams.hotPowerFlow),
+  dumbbellSculpt:
+    process.env.NEXT_PUBLIC_CLOUDFLARE_DUMBBELL_SCULPT_IFRAME_URL ??
+    buildCloudflareIframeUrl(cloudflareClassStreams.dumbbellSculpt),
+  babyMeFoundations:
+    process.env.NEXT_PUBLIC_CLOUDFLARE_BABY_ME_FOUNDATIONS_IFRAME_URL ??
+    buildCloudflareIframeUrl(cloudflareClassStreams.babyMeFoundations),
+  mobilityReset:
+    process.env.NEXT_PUBLIC_CLOUDFLARE_MOBILITY_RESET_IFRAME_URL ??
+    buildCloudflareIframeUrl(cloudflareClassStreams.mobilityReset)
 } as const;
 
 export function getNavItems(labels: NavLabels): { id: SectionId; label: string }[] {
@@ -156,32 +208,51 @@ const enContent: LandingContent = {
   scrollIndicatorLabel: "Scroll to explore",
   classFormatsBadge: "What We Offer",
   conceptTitle: "What We Offer",
-  conceptIntro: "Hot yoga, strength, mobility and recovery, and parent-friendly training.",
+  conceptIntro: "Four signature formats: Hot Yoga, Strength Fundamentals, Mobility + Recovery, and Mom/Dad + Baby.",
   classCards: [
     {
+      groupSlug: "hot-yoga",
       title: "Hot Yoga",
-      tagline: "Heat. Sweat. Transform.",
-      description: "The only heated yoga in Armenia. 95°F, 60 minutes, complete release.",
+      tagline: "Hot Power Flow",
+      description:
+        "A dynamic heated vinyasa that builds flexibility, full-body strength, and focused endurance in a 95°F studio.",
       image: "/images/gallery/fitness-2.jpg",
-      iframeSrc: cloudflareClassIframes.yoga
+      videoSrc: "/videos/classes/hot-power-flow.mp4",
+      streamId: cloudflareClassStreams.hotPowerFlow,
+      iframeSrc: cloudflareClassIframes.hotPowerFlow
     },
     {
+      groupSlug: "strength-fundamentals",
       title: "Strength Fundamentals",
-      tagline: "Build From the Ground Up.",
-      description: "Functional strength with dumbbells and bodyweight. Proper form. Real results.",
-      image: "/images/gallery/fitness-3.jpg"
+      tagline: "Dumbbell Sculpt",
+      description:
+        "A fast-paced full-body strength circuit with Bala Bars to build lean muscle, elevate heart rate, and drive real-world power.",
+      image: "/images/gallery/fitness-3.jpg",
+      videoSrc: "/videos/classes/dumbbell-sculpt.mp4",
+      streamId: cloudflareClassStreams.dumbbellSculpt,
+      iframeSrc: cloudflareClassIframes.dumbbellSculpt
     },
     {
+      groupSlug: "mobility-recovery",
       title: "Mobility & Recovery",
-      tagline: "Move Better. Feel Better.",
-      description: "Deep stretching, myofascial release, breath work. Your body's reset button.",
-      image: "/images/gallery/fitness-4.jpg"
+      tagline: "Mobility Reset",
+      description:
+        "An active recovery class with joint mobility, spinal work, deep hip opening, and breathwork to restore range of motion.",
+      image: "/images/gallery/fitness-4.jpg",
+      videoSrc: "/videos/classes/mobility-reset.mp4",
+      streamId: cloudflareClassStreams.mobilityReset,
+      iframeSrc: cloudflareClassIframes.mobilityReset
     },
     {
+      groupSlug: "mom-dad-baby",
       title: "Mom/Dad & Baby",
-      tagline: "Stronger Together.",
-      description: "Parent-focused fitness with baby integration. Core rehab, strength, community.",
-      image: "/images/gallery/fitness-6.jpg"
+      tagline: "Baby + Me Foundations",
+      description:
+        "A gentle postpartum-safe class for parents and newborns focused on core rehab, pelvic floor activation, and supported movement.",
+      image: "/images/gallery/fitness-6.jpg",
+      videoSrc: "/videos/classes/baby-me-foundations.mp4",
+      streamId: cloudflareClassStreams.babyMeFoundations,
+      iframeSrc: cloudflareClassIframes.babyMeFoundations
     }
   ],
   conceptStoryParagraph:
@@ -206,6 +277,11 @@ const enContent: LandingContent = {
     "Physical Education Degree",
     "Certified Gym Instructor",
     "English Language Teaching"
+  ],
+  founderGallery: [
+    { src: "/images/founder/founder-1.png", alt: "Marzie Zare leading a studio session" },
+    { src: "/images/founder/founder-2.webp", alt: "Marzie Zare in motion during class" },
+    { src: "/images/founder/founder-3.png", alt: "Marzie Zare portrait at Sofi Fitness" }
   ],
   pricingBadge: "Founding Rates",
   pricingTitle: "Founding Member Pricing",
@@ -305,32 +381,51 @@ const hyContent: LandingContent = {
   scrollIndicatorLabel: "Թերթեք՝ շարունակելու համար",
   classFormatsBadge: "Ինչ ենք առաջարկում",
   conceptTitle: "Ինչ ենք առաջարկում",
-  conceptIntro: "Թեժ յոգա, ուժային, շարժունակություն և վերականգնում, ինչպես նաև ծնող-երեխա ձևաչափ։",
+  conceptIntro: "Չորս հիմնական ձևաչափ՝ Թեժ յոգա, Ուժի հիմունքներ, Շարժունակություն և վերականգնում, Մամա/Պապա և երեխա։",
   classCards: [
     {
+      groupSlug: "hot-yoga",
       title: "Թեժ յոգա",
-      tagline: "Տաքություն. Քրտինք. Փոխակերպում.",
-      description: "Հայաստանում միակ տաք յոգան։ 35°C, 60 րոպե, լիարժեք ազատում։",
+      tagline: "Hot Power Flow",
+      description:
+        "Դինամիկ տաք վինյասա, որը 35°C ստուդիայում զարգացնում է ճկունություն, ամբողջ մարմնի ուժ և կենտրոնացված դիմացկունություն։",
       image: "/images/gallery/fitness-2.jpg",
-      iframeSrc: cloudflareClassIframes.yoga
+      videoSrc: "/videos/classes/hot-power-flow.mp4",
+      streamId: cloudflareClassStreams.hotPowerFlow,
+      iframeSrc: cloudflareClassIframes.hotPowerFlow
     },
     {
+      groupSlug: "strength-fundamentals",
       title: "Ուժի հիմունքներ",
-      tagline: "Կառուցիր հիմքից։",
-      description: "Ֆունկցիոնալ ուժային պարապմունքներ հանտելներով և սեփական քաշով։ Ճիշտ տեխնիկա։ Իրական արդյունքներ։",
-      image: "/images/gallery/fitness-3.jpg"
+      tagline: "Dumbbell Sculpt",
+      description:
+        "Արագ տեմպով ամբողջ մարմնի ուժային սեսիա Bala Bar-երով, որը ձևավորում է նիհար մկաններ, բարձրացնում սրտի հաճախությունը և ուժեղացնում ֆունկցիոնալ ուժը։",
+      image: "/images/gallery/fitness-3.jpg",
+      videoSrc: "/videos/classes/dumbbell-sculpt.mp4",
+      streamId: cloudflareClassStreams.dumbbellSculpt,
+      iframeSrc: cloudflareClassIframes.dumbbellSculpt
     },
     {
+      groupSlug: "mobility-recovery",
       title: "Շարժունակություն և վերականգնում",
-      tagline: "Շարժվիր ավելի լավ։ Զգա ավելի լավ։",
-      description: "Խորը ձգումներ, միոֆասցիալ թուլացում, շնչառական աշխատանք։ Ձեր մարմնի վերաթողարկման կոճակը։",
-      image: "/images/gallery/fitness-4.jpg"
+      tagline: "Mobility Reset",
+      description:
+        "Ակտիվ վերականգնման դաս՝ հոդերի շարժունակությամբ, ողնաշարի աշխատանքով, ազդրի խորը բացումներով և շնչառությամբ՝ շարժման ծավալը վերականգնելու համար։",
+      image: "/images/gallery/fitness-4.jpg",
+      videoSrc: "/videos/classes/mobility-reset.mp4",
+      streamId: cloudflareClassStreams.mobilityReset,
+      iframeSrc: cloudflareClassIframes.mobilityReset
     },
     {
+      groupSlug: "mom-dad-baby",
       title: "Մամա/Պապա և երեխա",
-      tagline: "Միասին ավելի ուժեղ։",
-      description: "Ծնողի համար նախատեսված մարզում՝ երեխայի ինտեգրմամբ։ Կորի վերականգնում, ուժ, համայնք։",
-      image: "/images/gallery/fitness-6.jpg"
+      tagline: "Baby + Me Foundations",
+      description:
+        "Նուրբ, հետծննդյան փուլին անվտանգ դաս ծնողների և նորածինների համար՝ կորի վերականգնման, կոնքի հատակի ակտիվացման և աջակցվող շարժման շեշտով։",
+      image: "/images/gallery/fitness-6.jpg",
+      videoSrc: "/videos/classes/baby-me-foundations.mp4",
+      streamId: cloudflareClassStreams.babyMeFoundations,
+      iframeSrc: cloudflareClassIframes.babyMeFoundations
     }
   ],
   conceptStoryParagraph:
@@ -355,6 +450,11 @@ const hyContent: LandingContent = {
     "Ֆիզդաստիարակության դիպլոմ",
     "Սերտիֆիկացված մարզիչ",
     "Անգլերենի դասավանդում"
+  ],
+  founderGallery: [
+    { src: "/images/founder/founder-1.png", alt: "Մարզի Զարեն վարում է ստուդիայի դաս" },
+    { src: "/images/founder/founder-2.webp", alt: "Մարզի Զարեն շարժման պահին" },
+    { src: "/images/founder/founder-3.png", alt: "Մարզի Զարեի դիմանկար Sofi Fitness-ում" }
   ],
   pricingBadge: "Հիմնադիրների գներ",
   pricingTitle: "Հիմնադիր անդամակցության գներ",
@@ -454,32 +554,51 @@ const ruContent: LandingContent = {
   scrollIndicatorLabel: "Листайте, чтобы узнать больше",
   classFormatsBadge: "Наши направления",
   conceptTitle: "Что мы предлагаем",
-  conceptIntro: "Горячая йога, силовые, мобильность и восстановление, а также форматы для родителей с малышом.",
+  conceptIntro: "Четыре ключевых формата: Горячая йога, Силовые основы, Мобильность и восстановление, Мама/Папа и малыш.",
   classCards: [
     {
+      groupSlug: "hot-yoga",
       title: "Горячая йога",
-      tagline: "Жар. Пот. Трансформация.",
-      description: "Единственная горячая йога в Армении. 35°C, 60 минут, полное освобождение.",
+      tagline: "Hot Power Flow",
+      description:
+        "Динамичная горячая виньяса в студии 35°C, которая развивает гибкость, силу всего тела и устойчивую концентрацию.",
       image: "/images/gallery/fitness-2.jpg",
-      iframeSrc: cloudflareClassIframes.yoga
+      videoSrc: "/videos/classes/hot-power-flow.mp4",
+      streamId: cloudflareClassStreams.hotPowerFlow,
+      iframeSrc: cloudflareClassIframes.hotPowerFlow
     },
     {
+      groupSlug: "strength-fundamentals",
       title: "Силовые основы",
-      tagline: "Строй с нуля.",
-      description: "Функциональная силовая тренировка с гантелями и собственным весом. Правильная техника. Реальный результат.",
-      image: "/images/gallery/fitness-3.jpg"
+      tagline: "Dumbbell Sculpt",
+      description:
+        "Быстрая круговая силовая тренировка на все тело с Bala Bars, которая формирует сухую мышечную массу и повышает рабочую выносливость.",
+      image: "/images/gallery/fitness-3.jpg",
+      videoSrc: "/videos/classes/dumbbell-sculpt.mp4",
+      streamId: cloudflareClassStreams.dumbbellSculpt,
+      iframeSrc: cloudflareClassIframes.dumbbellSculpt
     },
     {
+      groupSlug: "mobility-recovery",
       title: "Мобильность и восстановление",
-      tagline: "Двигайся лучше. Чувствуй себя лучше.",
-      description: "Глубокая растяжка, миофасциальный релиз, дыхательные практики. Кнопка перезагрузки вашего тела.",
-      image: "/images/gallery/fitness-4.jpg"
+      tagline: "Mobility Reset",
+      description:
+        "Класс активного восстановления с мобильностью суставов, работой со спиной, глубоким раскрытием бедер и дыхательными практиками для возврата амплитуды движения.",
+      image: "/images/gallery/fitness-4.jpg",
+      videoSrc: "/videos/classes/mobility-reset.mp4",
+      streamId: cloudflareClassStreams.mobilityReset,
+      iframeSrc: cloudflareClassIframes.mobilityReset
     },
     {
+      groupSlug: "mom-dad-baby",
       title: "Мама/Папа и малыш",
-      tagline: "Сильнее вместе.",
-      description: "Фитнес для родителей с малышом. Восстановление кора, сила, сообщество.",
-      image: "/images/gallery/fitness-6.jpg"
+      tagline: "Baby + Me Foundations",
+      description:
+        "Мягкий и безопасный послеродовой класс для родителей с новорожденными: восстановление кора, активация мышц тазового дна и поддерживаемое движение.",
+      image: "/images/gallery/fitness-6.jpg",
+      videoSrc: "/videos/classes/baby-me-foundations.mp4",
+      streamId: cloudflareClassStreams.babyMeFoundations,
+      iframeSrc: cloudflareClassIframes.babyMeFoundations
     }
   ],
   conceptStoryParagraph:
@@ -504,6 +623,11 @@ const ruContent: LandingContent = {
     "Диплом по физическому воспитанию",
     "Сертифицированный инструктор",
     "Преподаватель английского языка"
+  ],
+  founderGallery: [
+    { src: "/images/founder/founder-1.png", alt: "Марзи Заре проводит занятие в студии" },
+    { src: "/images/founder/founder-2.webp", alt: "Марзи Заре в движении во время класса" },
+    { src: "/images/founder/founder-3.png", alt: "Портрет Марзи Заре в Sofi Fitness" }
   ],
   pricingBadge: "Цены для основателей",
   pricingTitle: "Тарифы founding members",

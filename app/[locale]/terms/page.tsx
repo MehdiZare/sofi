@@ -1,17 +1,69 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { contentByLocale } from "@/lib/constants";
-import { defaultLocale, isLocale } from "@/lib/i18n";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import { legalContentByLocale } from "@/lib/legal";
+import { buildLegalPageStructuredData } from "@/lib/seo";
+import JsonLd from "@/components/shared/JsonLd";
 
 type LocaleTermsPageProps = {
   params: Promise<{ locale: string }>;
 };
 
+function resolveLocale(value: string): Locale {
+  return isLocale(value) ? value : defaultLocale;
+}
+
+function buildLanguageAlternates(baseUrl: string, path: string) {
+  return {
+    en: `${baseUrl}/en${path}`,
+    hy: `${baseUrl}/hy${path}`,
+    ru: `${baseUrl}/ru${path}`
+  };
+}
+
+export async function generateMetadata({ params }: LocaleTermsPageProps): Promise<Metadata> {
+  const { locale: localeParam } = await params;
+  const locale = resolveLocale(localeParam);
+  const legalContent = legalContentByLocale[locale];
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofi.fitness";
+  const title = `${legalContent.termsTitle} | Sofi Fitness`;
+  const description = legalContent.termsSections[0]?.body[0] ?? legalContent.termsTitle;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/terms`,
+      languages: buildLanguageAlternates(baseUrl, "/terms")
+    },
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url: `${baseUrl}/${locale}/terms`
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description
+    }
+  };
+}
+
 export default async function LocaleTermsPage({ params }: LocaleTermsPageProps) {
   const { locale: localeParam } = await params;
-  const locale = isLocale(localeParam) ? localeParam : defaultLocale;
+  const locale = resolveLocale(localeParam);
   const content = contentByLocale[locale];
   const legalContent = legalContentByLocale[locale];
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sofi.fitness";
+
+  const schema = buildLegalPageStructuredData(
+    locale,
+    legalContent.termsTitle,
+    legalContent.termsSections[0]?.body[0] ?? legalContent.termsTitle,
+    `${baseUrl}/${locale}/terms`
+  );
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-3xl px-6 py-24 text-text">
@@ -33,6 +85,8 @@ export default async function LocaleTermsPage({ params }: LocaleTermsPageProps) 
           </section>
         ))}
       </div>
+
+      <JsonLd id="terms-schema" data={schema} />
     </main>
   );
 }

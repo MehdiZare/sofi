@@ -1,0 +1,116 @@
+{
+  "generatedAt": "2026-02-26T02:32:00.688Z",
+  "customerSubdomain": "customer-bvw30n7zlfevs367.cloudflarestream.com",
+  "records": [
+    {
+      "slug": "hot-power-flow",
+      "groupSlug": "hot-yoga",
+      "sourceRelativePath": "docs/Website/1.Hot Yoga/Hot Power Flow.mp4",
+      "cleanedName": "hot-yoga-hot-power-flow",
+      "streamId": "b0df2d9ced432615b29302fb6b30cf9d",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/b0df2d9ced432615b29302fb6b30cf9d/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Fb0df2d9ced432615b29302fb6b30cf9d%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_HOT_POWER_FLOW_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_HOT_POWER_FLOW_IFRAME_URL"
+    },
+    {
+      "slug": "hot-yoga-sculpt",
+      "groupSlug": "hot-yoga",
+      "sourceRelativePath": "docs/Website/1.Hot Yoga/Hot Yoga + Sculpt.mp4",
+      "cleanedName": "hot-yoga-hot-yoga-sculpt",
+      "streamId": "cfc36f3cddc2cf706e40ad2098f21abd",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/cfc36f3cddc2cf706e40ad2098f21abd/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Fcfc36f3cddc2cf706e40ad2098f21abd%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_HOT_YOGA_SCULPT_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_HOT_YOGA_SCULPT_IFRAME_URL"
+    },
+    {
+      "slug": "dumbbell-sculpt",
+      "groupSlug": "strength-fundamentals",
+      "sourceRelativePath": "docs/Website/2.STRENGTH FUNDAMENTALS/Dumbbell Sculpt.mp4",
+      "cleanedName": "strength-fundamentals-dumbbell-sculpt",
+      "streamId": "18ce772a06872ca6353e3ad9e57bed67",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/18ce772a06872ca6353e3ad9e57bed67/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F18ce772a06872ca6353e3ad9e57bed67%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_DUMBBELL_SCULPT_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_DUMBBELL_SCULPT_IFRAME_URL"
+    },
+    {
+      "slug": "core-glutes",
+      "groupSlug": "strength-fundamentals",
+      "sourceRelativePath": "docs/Website/2.STRENGTH FUNDAMENTALS/Core + Glutes.mp4",
+      "cleanedName": "strength-fundamentals-core-glutes",
+      "streamId": "e4fc5322393966be6614bcee35942e94",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/e4fc5322393966be6614bcee35942e94/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Fe4fc5322393966be6614bcee35942e94%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_CORE_GLUTES_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_CORE_GLUTES_IFRAME_URL"
+    },
+    {
+      "slug": "upper-body-posture",
+      "groupSlug": "strength-fundamentals",
+      "sourceRelativePath": "docs/Website/2.STRENGTH FUNDAMENTALS/Upper Body + Posture.mp4",
+      "cleanedName": "strength-fundamentals-upper-body-posture",
+      "streamId": "80de4bb6b361be9fdf55a39e0c67c289",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/80de4bb6b361be9fdf55a39e0c67c289/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F80de4bb6b361be9fdf55a39e0c67c289%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_UPPER_BODY_POSTURE_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_UPPER_BODY_POSTURE_IFRAME_URL"
+    },
+    {
+      "slug": "baby-me-foundations",
+      "groupSlug": "mom-dad-baby",
+      "sourceRelativePath": "docs/Website/3.MOM_DAD + BABY/Baby + Me Foundations2.mp4",
+      "cleanedName": "mom-dad-baby-baby-me-foundations",
+      "streamId": "47c10b3289b69dff2340325f693af189",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/47c10b3289b69dff2340325f693af189/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F47c10b3289b69dff2340325f693af189%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_BABY_ME_FOUNDATIONS_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_BABY_ME_FOUNDATIONS_IFRAME_URL"
+    },
+    {
+      "slug": "baby-me-strong",
+      "groupSlug": "mom-dad-baby",
+      "sourceRelativePath": "docs/Website/3.MOM_DAD + BABY/Baby + Me Strong2.mp4",
+      "cleanedName": "mom-dad-baby-baby-me-strong",
+      "streamId": "b356d2028cbe09d060a415252b2718a2",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/b356d2028cbe09d060a415252b2718a2/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Fb356d2028cbe09d060a415252b2718a2%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_BABY_ME_STRONG_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_BABY_ME_STRONG_IFRAME_URL"
+    },
+    {
+      "slug": "mobility-reset",
+      "groupSlug": "mobility-recovery",
+      "sourceRelativePath": "docs/Website/4.MOBILITY + RECOVERY/Mobility Reset.mp4",
+      "cleanedName": "mobility-recovery-mobility-reset",
+      "streamId": "c2ce3e1a6e52c2bd4f3ed3c2feb165b9",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/c2ce3e1a6e52c2bd4f3ed3c2feb165b9/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Fc2ce3e1a6e52c2bd4f3ed3c2feb165b9%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_MOBILITY_RESET_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_MOBILITY_RESET_IFRAME_URL"
+    },
+    {
+      "slug": "deep-stretch-restore",
+      "groupSlug": "mobility-recovery",
+      "sourceRelativePath": "docs/Website/4.MOBILITY + RECOVERY/Deep Stretch Restore.mp4",
+      "cleanedName": "mobility-recovery-deep-stretch-restore",
+      "streamId": "af2bd4639fcb5a715a949d2c89f48866",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/af2bd4639fcb5a715a949d2c89f48866/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Faf2bd4639fcb5a715a949d2c89f48866%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_DEEP_STRETCH_RESTORE_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_DEEP_STRETCH_RESTORE_IFRAME_URL"
+    },
+    {
+      "slug": "yin-release",
+      "groupSlug": "mobility-recovery",
+      "sourceRelativePath": "docs/Website/4.MOBILITY + RECOVERY/Yin + Release.mp4",
+      "cleanedName": "mobility-recovery-yin-release",
+      "streamId": "f29152e5af09ab1e4bd6f59e726f7e58",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/f29152e5af09ab1e4bd6f59e726f7e58/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2Ff29152e5af09ab1e4bd6f59e726f7e58%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_YIN_RELEASE_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_YIN_RELEASE_IFRAME_URL"
+    },
+    {
+      "slug": "recovery-flow",
+      "groupSlug": "mobility-recovery",
+      "sourceRelativePath": "docs/Website/4.MOBILITY + RECOVERY/Recovery Flow.mp4",
+      "cleanedName": "mobility-recovery-recovery-flow",
+      "streamId": "143b08bc88996c5be2dbc45fbe03e2f2",
+      "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/143b08bc88996c5be2dbc45fbe03e2f2/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F143b08bc88996c5be2dbc45fbe03e2f2%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+      "streamIdEnvVar": "NEXT_PUBLIC_CLOUDFLARE_RECOVERY_FLOW_STREAM_ID",
+      "iframeEnvVar": "NEXT_PUBLIC_CLOUDFLARE_RECOVERY_FLOW_IFRAME_URL"
+    }
+  ]
+}

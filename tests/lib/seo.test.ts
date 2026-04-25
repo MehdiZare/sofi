@@ -32,7 +32,10 @@ describe("seo structured data", () => {
     expect(schemas).toHaveLength(3);
     const healthClub = schemas.find((schema) => schema["@type"] === "HealthClub");
     expect(healthClub).toBeTruthy();
-    expect(healthClub?.inLanguage).toBe("en-US");
+    if (!healthClub || !("inLanguage" in healthClub)) {
+      throw new Error("Expected HealthClub schema to include inLanguage");
+    }
+    expect(healthClub.inLanguage).toBe("en-US");
   });
 
   it("builds class schema including VideoObject when stream data is available", () => {

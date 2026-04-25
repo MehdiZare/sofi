@@ -9,6 +9,14 @@ export const metadata: Metadata = {
   title: "Sofi Fitness",
   description:
     "Yerevan's first English-friendly boutique fitness studio. Hot yoga, strength, mobility, and recovery classes.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" }
+    ],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }]
+  },
   robots: {
     index: true,
     follow: true

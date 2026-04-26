@@ -13,7 +13,8 @@
   },
   "hero": {
     "streamId": "4476b302dd370cf938a04b14fc4809b0",
-    "iframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/4476b302dd370cf938a04b14fc4809b0/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F4476b302dd370cf938a04b14fc4809b0%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+    "desktopIframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/4476b302dd370cf938a04b14fc4809b0/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F4476b302dd370cf938a04b14fc4809b0%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
+    "mobileIframeUrl": "https://customer-bvw30n7zlfevs367.cloudflarestream.com/4476b302dd370cf938a04b14fc4809b0/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F4476b302dd370cf938a04b14fc4809b0%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600",
     "envVars": [
       "NEXT_PUBLIC_CLOUDFLARE_HERO_DESKTOP_IFRAME_URL",
       "NEXT_PUBLIC_CLOUDFLARE_HERO_MOBILE_IFRAME_URL"

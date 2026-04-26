@@ -19,9 +19,9 @@ const CLOUDFLARE_HERO_IFRAME_FALLBACK =
 
 export default function Hero({ content }: HeroProps) {
   const desktopCloudflareIframeSrc =
-    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_DESKTOP_IFRAME_URL ?? CLOUDFLARE_HERO_IFRAME_FALLBACK;
+    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_DESKTOP_IFRAME_URL?.trim() || CLOUDFLARE_HERO_IFRAME_FALLBACK;
   const mobileCloudflareIframeSrc =
-    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_MOBILE_IFRAME_URL ?? CLOUDFLARE_HERO_IFRAME_FALLBACK;
+    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_MOBILE_IFRAME_URL?.trim() || CLOUDFLARE_HERO_IFRAME_FALLBACK;
 
   const sectionRef = useRef(null);
   const prefersReducedMotion = useReducedMotion();

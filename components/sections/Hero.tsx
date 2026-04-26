@@ -14,13 +14,14 @@ type HeroProps = {
   content: LandingContent;
 };
 
+const CLOUDFLARE_HERO_IFRAME_FALLBACK =
+  "https://customer-bvw30n7zlfevs367.cloudflarestream.com/4476b302dd370cf938a04b14fc4809b0/iframe?muted=true&preload=true&loop=true&autoplay=true&controls=false&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F4476b302dd370cf938a04b14fc4809b0%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600";
+
 export default function Hero({ content }: HeroProps) {
   const desktopCloudflareIframeSrc =
-    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_DESKTOP_IFRAME_URL ??
-    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/65929572aefd9680dbee8d0210b37839/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F65929572aefd9680dbee8d0210b37839%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600";
+    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_DESKTOP_IFRAME_URL?.trim() || CLOUDFLARE_HERO_IFRAME_FALLBACK;
   const mobileCloudflareIframeSrc =
-    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_MOBILE_IFRAME_URL ??
-    "https://customer-bvw30n7zlfevs367.cloudflarestream.com/8c1960ea376d832a7b8cace716aa32ae/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-bvw30n7zlfevs367.cloudflarestream.com%2F8c1960ea376d832a7b8cace716aa32ae%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600";
+    process.env.NEXT_PUBLIC_CLOUDFLARE_HERO_MOBILE_IFRAME_URL?.trim() || CLOUDFLARE_HERO_IFRAME_FALLBACK;
 
   const sectionRef = useRef(null);
   const prefersReducedMotion = useReducedMotion();
